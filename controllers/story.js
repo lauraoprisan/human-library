@@ -1,5 +1,6 @@
 const cloudinary = require("../middleware/cloudinary");
 const Story = require("../models/Story");
+const Favorite = require("../models/Favorite");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -39,6 +40,8 @@ module.exports = {
         title: req.body.title,
         textContent: req.body.textContent,
         image: result.secure_url,
+        country: req.body.country,
+        continent: req.body.continent,
         cloudinaryId: result.public_id,
         likes: 0,
         user: req.user.id,
@@ -52,8 +55,8 @@ module.exports = {
   likeStory: async (req, res) => {
     try {
       const story = await Story.findById(req.params.id);
-  
-      // Check if the post has already been liked
+
+      // Adding like whether the user already liked it or not
       if (story.usersWhoLiked.filter(like => like._id == req.user.id).length>0) { 
         res.redirect(`/story/${req.params.id}`);
       } else{
@@ -62,9 +65,57 @@ module.exports = {
         await story.save();
         res.redirect(`/story/${req.params.id}`);
       }
+
+
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
+    }
+  },
+  unlikeStory: async (req, res) => {
+    try {
+      const story = await Story.findById(req.params.id);
+
+      // Adding like whether the user already liked it or not
+      if (story.usersWhoLiked.filter(like => like._id == req.user.id).length === 0) { 
+        res.redirect(`/story/${req.params.id}`);
+        console.log("Story has not been liked");
+      } else{
+        const removeIndex = story.usersWhoLiked.map(like => like._id).indexOf(req.user.id);
+        story.likes.splice(removeIndex,1);
+        await story.save();
+        res.redirect(`/story/${req.params.id}`);
+        console.log("User disliked the story");
+      }
+
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  },
+  getFavorites: async (req, res) => {
+    try {
+      //Since we have a session each req contains the logged-in users info: rez.user
+      //console.log(req.user) to see everything
+      //Grabbing just the posts of the logged-in user
+      const stories = await Favorite.find({ user: req.user.id }).populate("story");
+      console.log(stories)
+      //Sending post data from mongodb and user data to ejs template
+      res.render("favorites.ejs", { stories: stories, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  favoriteStory: async (req, res) => {
+    try {
+      await Favorite.create({
+        user: req.user.id,
+        story: req.params.id,
+      });
+      console.log("Favorite story has been added!");
+      res.redirect(`/story/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
     }
   },
   // likeStory: async (req, res) => {

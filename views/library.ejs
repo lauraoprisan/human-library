@@ -1,8 +1,37 @@
 <%- include('partials/header') -%>
-  <div class="container">
+  <div class="container col-2">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% for(var i=0; i<stories.length; i++) {%>
+
+        <h3>Filter</h3>
+        <form action="/library/filter" enctype="multipart/form-data"
+            method="GET">
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <select name="country" class="form-control">
+              <% for (var i = 0; i < countries.length; i++) { %>
+                <option value="<%= countries[i] %>"><%= countries[i] %></option>
+              <% } %>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="continent" class="form-label">Continent</label>
+            <select name="continent" class="form-control">
+              <% for (var i = 0; i < continents.length; i++) { %>
+                <option value="<%= continents[i] %>"><%= continents[i] %></option>
+              <% } %>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+      </ul>
+    </div>
+  </div>  
+
+  <div class="container col-10">
+    <div class="row justify-content-center mt-5">
+      <ul class="row list-unstyled">
+        <% if(!filterOn){for(var i=0; i<stories.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <span><%= stories[i].user.userName%></span>
             <a href="/story/<%= stories[i]._id%>">
@@ -11,7 +40,17 @@
               <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
             </a>
           </li>
-        <% } %>
+        <% }} %>
+       <% if(filterOn){for(var i=0; i<stories.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <span><%= stories[i].user.userName%></span>
+            <a href="/story/<%= stories[i]._id%>">
+              <h2><%= stories[i].title%></h2>
+              <img class="img-fluid" src="<%= stories[i].image%>">
+              <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
+            </a>
+          </li>
+        <% }} %>
         </ul>
     </div>
   </div>  

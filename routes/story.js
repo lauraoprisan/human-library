@@ -15,6 +15,8 @@ router.post("/createStory", upload.single("file"), storyController.createStory);
 
 //Enables user to like post. In controller, uses POST model to update likes by 1
 router.put("/likeStory/:id", storyController.likeStory);
+router.put("/unlikeStory/:id", storyController.unlikeStory);
+router.post("/favoriteStory/:id", storyController.favoriteStory);
 
 //Enables user to delete post. In controller, uses POST model to delete post from mongo.db collection
 router.delete("/deleteStory/:id", storyController.deleteStory);

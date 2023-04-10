@@ -17,6 +17,14 @@ const StorySchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  country: {
+    type: String,
+    required: false,
+  },
+  continent: {
+    type: String,
+    required: false,
+  },
   likes: {
     type: Number,
     required: true,

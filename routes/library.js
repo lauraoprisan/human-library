@@ -8,5 +8,6 @@ const { ensureAuth } = require("../middleware/auth");
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
 router.get("/", ensureAuth, libraryController.getStories);
+router.get("/filter", libraryController.filterStories)
 
 module.exports = router;
