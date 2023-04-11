@@ -28,15 +28,19 @@
         <!--/Filter-->
         <!--Sort-->
         <h3>Sort by</h3>
+        <form action="/library/sortByMostLiked" 
+            method="GET">
+          <button type="submit" class="btn btn-primary" value="likes" name="mostLiked">Most liked</button>
+        </form>
         <form action="/library/sortByPopularity" 
             method="GET">
-          <button type="submit" class="btn btn-primary" value="popularity" name="popularity">Popularity</button>
+          <button type="submit" class="btn btn-primary" value="popularity" name="popularityHigh">Popularity</button>
         </form>
         <!--/Sort-->
         <!--Remove all filters and sorts-->
-        <form action="/library" method="GET">
+        <a class="btn btn-primary" href="/library">
           <button type="submit" class="btn btn-primary">Remove all</button>
-        </form>
+        </a>
         <!--/Remove all filters and sorts-->
 
       </ul>

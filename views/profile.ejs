@@ -9,11 +9,11 @@
       </div>
 <!--/User info-->
 <!--Add story-->
-      <% if(stories.length==0){ %>
+      <% if(!stories) { %>
       <div class="col-6">
           <div class="mt-5">
             <h2>Add a story</h2>
-            <form action="/story/createStory" enctype="multipart/form-data" method="POST">
+            <form action="/story/createStory" enctype="multipart/form-data" method="POST" id="add-story">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
                   <input type="text" class="form-control" id="title" name="title">
@@ -29,31 +29,71 @@
               <div class="mb-3">
                 <label for="country" class="form-label">Country</label>
                 <select name="country" id="country" class="form-control"></select>
+              
+ 
               </div>
               <div class="mb-3">
                 <label for="continent" class="form-label">Continent</label>
                 <select name="continent" id="continent" class="form-control"></select>
+    
+         
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+              <button type="submit" class="btn btn-primary" value="Upload">Submit first story</button>
             </form>
           </div>
       </div>
     <% } %>
 <!--/Add story-->
+<!--edit story-->
+<% if(editStory){ %>
+  <div class="col-6">
+      <div class="mt-5">
+        <h2>Edit your story</h2>
+        <form action="/updateStory/<%= stories._id %>?_method=PUT"  method="POST">
+          <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" name="newTitle" value="<%= stories.title%>">
+          </div>
+          <div class="mb-3">
+            <label for="textContent" class="form-label">textContent</label>
+            <textarea class="form-control" id="textContent" name="newTextContent" wrap ><%= stories.textContent%></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="imgUpload" class="form-label">Image</label>
+            <input type="file" class="form-control" id="imageUpload" name="newFile" value="<%= stories.image%>">
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <select name="newCountry" id="country" class="form-control"></select>
+          </div>
+          <div class="mb-3">
+            <label for="continent" class="form-label">Continent</label>
+            <select name="newContinent" id="continent" class="form-control"></select>
+          </div>
+         
+          <button type="submit" class="btn btn-primary" value="Upload">Save changes</button> 
+        </form>
+      </div>
+  </div>
+<% } %>
+<!--/edit story-->
 
 
       <div class="col-6">
         <ul class="row list-unstyled">
-        <% for(var i=0; i<stories.length; i++) {%>
+        <% if(stories){%>
           <li class="col-6 justify-content-between mt-5">
-            <a href="/story/<%= stories[i]._id%>">
-              <h2><%= stories[i].title%></h2>
-              <img class="img-fluid" src="<%= stories[i].image%>">
-              <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
+            <a href="/story/<%= stories._id%>">
+              <h2><%= stories.title%></h2>
+              <img class="img-fluid" src="<%= stories.image%>">
+              <p><%= stories.textContent.split(" ").slice(0,30).join(" ")%>...</p>
             </a>
           </li>
-        <% } %>
         </ul>
+          <div class="row justify-content-center mt-5">
+            <a class="btn btn-primary" href="/editStory/<%= stories._id%>">Edit story</a>
+          </div>
+        <% } %> 
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/favorites">See your favorites</a>
         </div> 

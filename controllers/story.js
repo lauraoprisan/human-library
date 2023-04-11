@@ -10,8 +10,7 @@ module.exports = {
       //Grabbing just the posts of the logged-in user
       const stories = await Story.find({ user: req.user.id });
       //Sending post data from mongodb and user data to ejs template
-      console.log(stories)
-      res.render("profile.ejs", { stories: stories, user: req.user });
+      res.render("profile.ejs", { stories: stories[0], user: req.user, editStory:false });
     } catch (err) {
       console.log(err);
     }
@@ -23,9 +22,14 @@ module.exports = {
       //http://localhost:3000/post/642f2c9f533b48258c27a452
       //id===642f2c9f533b48258c27a452
       const story = await Story.findById(req.params.id);
+
+      if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
+        story.usersWhoRead.push(req.user.id);
+        story.readBy++;
+        await story.save();
+      }
+
       res.render("story.ejs", { story: story, user: req.user});
-      console.log(story.user)
-      console.log(req.user.id)
     } catch (err) {
       console.log(err);
     }
@@ -47,6 +51,7 @@ module.exports = {
         readBy: 0,
         user: req.user.id,
       });
+    
       console.log("Story has been added!");
       res.redirect("/profile");
     } catch (err) {
@@ -99,10 +104,12 @@ module.exports = {
       //Since we have a session each req contains the logged-in users info: rez.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
+
       const stories = await Favorite.find({ user: req.user.id }).populate("story");
-      console.log(stories)
+      const validFavorites = stories.filter(fav => fav.story);
       //Sending post data from mongodb and user data to ejs template
-      res.render("favorites.ejs", { stories: stories, user: req.user });
+      res.render("favorites.ejs", { stories: validFavorites, user: req.user });
+      console.log(stories)
     } catch (err) {
       console.log(err);
     }
@@ -146,6 +153,40 @@ module.exports = {
       res.redirect("/profile");
     } catch (err) {
       res.redirect("/profile");
+    }
+  },
+  editStory: async (req, res) => {
+    try {
+      const stories = await Story.findById(req.params.id);
+      res.render("profile.ejs", { stories: stories, user: req.user, editStory:true});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  updateStory: async (req, res) => {
+    try {
+      let story = await Story.findOneAndUpdate(
+        { 
+            _id: req.params.id
+        }, 
+        {
+          $set: {title: req.body.newTitle, textContent: req.body.newTextContent},
+
+        },
+        {
+          new:true,
+        });
+
+        console.log("req")
+        console.log(req)
+        console.log("req bodyyyy")
+        console.log(req.body);
+        console.log("new title")
+        console.log(req.body);
+        res.render("profile.ejs", { stories: story, user: req.user, editStory:false});
+    
+    } catch (err) {
+       console.log(err);
     }
   },
 };

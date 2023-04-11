@@ -40,11 +40,19 @@ const StorySchema = new mongoose.Schema({
         ref: "User",
       }
     }
-],
-readBy: {
-  type: Number,
-  required: true,
-},
+  ],
+  readBy: {
+    type: Number,
+    required: true,
+  },
+  usersWhoRead:[
+    {
+      user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      }
+    }
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
