@@ -41,6 +41,10 @@ const StorySchema = new mongoose.Schema({
       }
     }
 ],
+readBy: {
+  type: Number,
+  required: true,
+},
   createdAt: {
     type: Date,
     default: Date.now,

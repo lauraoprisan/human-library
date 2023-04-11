@@ -43,5 +43,26 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+  sortByPopularity: async (req,res) =>{
+    try {
+      const stories = await Story.find().sort({ likes: "desc" }).populate('user', 'userName').lean(); // populate user field with username only
+
+       //grabbing the countries from the database,take the unique values and sort them
+       const countryArr = stories.map(obj => obj.country);
+       const uniqueCountries = [...new Set(countryArr)]
+       const sortedCountries = uniqueCountries.sort((a,b)=>a >b ? 1 : -1)
+ 
+        //grabbing the continents from the database,take the unique values and sort them
+       const continentArr = stories.map(obj => obj.continent);
+       const uniqueContinents = [...new Set(continentArr)]
+       const sortedContinents = uniqueContinents.sort((a,b)=>a >b ? 1 : -1)
+      
+    
+       res.render("library.ejs", { stories: stories, countries: sortedCountries, continents: sortedContinents, filterOn: true});
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 };

@@ -44,6 +44,7 @@ module.exports = {
         continent: req.body.continent,
         cloudinaryId: result.public_id,
         likes: 0,
+        readBy: 0,
         user: req.user.id,
       });
       console.log("Story has been added!");

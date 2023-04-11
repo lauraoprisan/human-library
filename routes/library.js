@@ -9,5 +9,6 @@ const { ensureAuth } = require("../middleware/auth");
 
 router.get("/", ensureAuth, libraryController.getStories);
 router.get("/filter", libraryController.filterStories)
+router.get("/sortByPopularity", libraryController.sortByPopularity)
 
 module.exports = router;

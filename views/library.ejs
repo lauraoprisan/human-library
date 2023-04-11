@@ -3,8 +3,9 @@
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
 
+        <!--Filter-->
         <h3>Filter</h3>
-        <form action="/library/filter" enctype="multipart/form-data"
+        <form action="/library/filter"
             method="GET">
           <div class="mb-3">
             <label for="country" class="form-label">Country</label>
@@ -24,6 +25,20 @@
           </div>
           <button type="submit" class="btn btn-primary">Filter</button>
         </form>
+        <!--/Filter-->
+        <!--Sort-->
+        <h3>Sort by</h3>
+        <form action="/library/sortByPopularity" 
+            method="GET">
+          <button type="submit" class="btn btn-primary" value="popularity" name="popularity">Popularity</button>
+        </form>
+        <!--/Sort-->
+        <!--Remove all filters and sorts-->
+        <form action="/library" method="GET">
+          <button type="submit" class="btn btn-primary">Remove all</button>
+        </form>
+        <!--/Remove all filters and sorts-->
+
       </ul>
     </div>
   </div>  
