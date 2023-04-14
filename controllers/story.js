@@ -21,6 +21,21 @@ module.exports = {
       //router.get("/:id", ensureAuth,postsController.getPost);
       //http://localhost:3000/post/642f2c9f533b48258c27a452
       //id===642f2c9f533b48258c27a452
+      const story = await Story.findById(req.params.id).populate('user', 'userName').lean();;
+
+      if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
+        story.usersWhoRead.push(req.user.id);
+        story.readBy++;
+       
+      }
+
+      res.render("story.ejs", { story: story, user: req.user});
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  viewedStory: async (req, res) => {
+    try {
       const story = await Story.findById(req.params.id);
 
       if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
@@ -29,7 +44,6 @@ module.exports = {
         await story.save();
       }
 
-      res.render("story.ejs", { story: story, user: req.user});
     } catch (err) {
       console.log(err);
     }
@@ -165,12 +179,21 @@ module.exports = {
   },
   updateStory: async (req, res) => {
     try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+
       let story = await Story.findOneAndUpdate(
         { 
             _id: req.params.id
         }, 
         {
-          $set: {title: req.body.newTitle, textContent: req.body.newTextContent},
+          $set: {
+            title: req.body.newTitle, 
+            textContent: req.body.newTextContent,
+            country: req.body.newCountry,
+            continent: req.body.newContinent,
+            image: result.secure_url,
+            cloudinaryId: result.public_id,
+          },
 
         },
         {
@@ -181,8 +204,8 @@ module.exports = {
         console.log(req)
         console.log("req bodyyyy")
         console.log(req.body);
-        console.log("new title")
-        console.log(req.body);
+        console.log("new continent")
+        console.log(req.body.newContinent);
         res.render("profile.ejs", { stories: story, user: req.user, editStory:false});
     
     } catch (err) {

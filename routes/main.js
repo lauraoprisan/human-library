@@ -15,6 +15,7 @@ router.get("/favorites", ensureAuth, storyController.getFavorites);
 router.get("/editStory/:id", ensureAuth, storyController.editStory);
 router.put("/updateStory/:id", ensureAuth, storyController.updateStory);
 
+
 //Routes for user login/signup
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);

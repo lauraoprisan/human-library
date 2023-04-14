@@ -3,16 +3,24 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
     //select the country
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectCountry =document.querySelector("#country")
-    
+        const countryValue = document.querySelector("#countryChoice").value
+
         fetch("https://restcountries.com/v3.1/all").then(res => {
             return res.json();
         }).then(data =>{
             let output =   `<option value="">No selection</option>`
             const sorteData = data.sort((a,b)=>a.name.common >b.name.common ? 1 : -1)
             sorteData.forEach((country) => {
-                output += `<option value="${country.name.common}">${country.name.common}</option>`
+                if(countryValue == country.name.common){
+                    //select the option that has the countryValue and add a selected attribute
+                    output += `<option value="${country.name.common}" selected>${country.name.common}</option>`
+                }else{
+                    output += `<option value="${country.name.common}">${country.name.common}</option>`
+                }
+                
                 selectCountry.innerHTML = output
             })
+           
         }).catch(err =>{
             console.log(err)
         })
@@ -21,6 +29,7 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
     //select the continent
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectContinent =document.querySelector("#continent")
+        const continentValue = document.querySelector("#continentChoice").value
 
         fetch("https://restcountries.com/v3.1/all").then(res => {
             return res.json();
@@ -32,7 +41,12 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
             const sortedContinents = uniqueContinents.sort((a,b)=>a >b ? 1 : -1)
 
             sortedContinents.forEach(continent => {
-                output += `<option value="${continent}" >${continent}</option>`
+                if(continentValue == continent){
+                    //select the option that has the countryValue and add a selected attribute
+                    output += `<option value="${continent}" selected>${continent}</option>`
+                }else{
+                    output += `<option value="${continent}">${continent}</option>`
+                }
                 selectContinent.innerHTML = output
             })
         
@@ -43,3 +57,23 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
 }
 
 
+const filterCountry = document.querySelector("#filter-country")
+const filterContinent = document.querySelector("#filter-continent")
+const countryOptions = document.querySelector("#countries-options")
+const continentOptions = document.querySelector("#continents-options")
+
+filterCountry.addEventListener("click", showCountries)
+function showCountries(){
+    filterCountry.classList.add("chosen-btn")
+    filterContinent.classList.remove("chosen-btn")
+    countryOptions.classList.remove("hidden")
+    continentOptions.classList.add("hidden")
+}
+
+filterContinent.addEventListener("click", showContinents)
+function showContinents(){
+    filterCountry.classList.remove("chosen-btn")
+    filterContinent.classList.add("chosen-btn")
+    countryOptions.classList.add("hidden")
+    continentOptions.classList.remove("hidden")
+}

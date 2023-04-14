@@ -1,0 +1,15 @@
+.hidden{
+    display:none;
+}
+
+.chosen-btn{
+    background-color: cornflowerblue;
+}
+
+/*temporary styling */
+span{
+    display:block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin:10px 0;
+}

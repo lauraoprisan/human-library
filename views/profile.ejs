@@ -49,7 +49,7 @@
   <div class="col-6">
       <div class="mt-5">
         <h2>Edit your story</h2>
-        <form action="/updateStory/<%= stories._id %>?_method=PUT"  method="POST">
+        <form action="/updateStory/<%= stories._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" id="title" name="newTitle" value="<%= stories.title%>">
@@ -60,15 +60,17 @@
           </div>
           <div class="mb-3">
             <label for="imgUpload" class="form-label">Image</label>
-            <input type="file" class="form-control" id="imageUpload" name="newFile" value="<%= stories.image%>">
+            <input type="file" class="form-control" id="imageUpload" name="File" value="<%= stories.image%>">
           </div>
           <div class="mb-3">
             <label for="country" class="form-label">Country</label>
             <select name="newCountry" id="country" class="form-control"></select>
+            <option id="countryChoice" value="<%= stories.country%>"></option>
           </div>
           <div class="mb-3">
             <label for="continent" class="form-label">Continent</label>
             <select name="newContinent" id="continent" class="form-control"></select>
+            <option id="continentChoice" value="<%= stories.continent%>"></option>
           </div>
          
           <button type="submit" class="btn btn-primary" value="Upload">Save changes</button> 

@@ -1,26 +1,38 @@
 <%- include('partials/header') -%>
+ <!--User info-->
+ <div>
+  <p><strong>User Name</strong>: <%= user.userName %></p>
+  <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+</div>
+<!--/User info-->
   <div class="container col-2">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-
+     
         <!--Filter-->
         <h3>Filter</h3>
         <form action="/library/filter"
             method="GET">
           <div class="mb-3">
-            <label for="country" class="form-label">Country</label>
-            <select name="country" class="form-control">
-              <% for (var i = 0; i < countries.length; i++) { %>
+            <span id="filter-country" class="chosen-btn">Country</span>
+            <select id="countries-options" name="country" class="form-control">
+              <% for (let i = -1; i < countries.length; i++) { %>
+                <% if(i == -1){ %>
+                <option value="">No selection</option>
+                <% } else{ %>
                 <option value="<%= countries[i] %>"><%= countries[i] %></option>
-              <% } %>
+              <% }} %>
             </select>
           </div>
           <div class="mb-3">
-            <label for="continent" class="form-label">Continent</label>
-            <select name="continent" class="form-control">
-              <% for (var i = 0; i < continents.length; i++) { %>
+            <span id="filter-continent">Continent</span>
+            <select id="continents-options" name="continent" class="form-control hidden">
+              <% for (let i = -1; i < continents.length; i++) { %>
+                <% if(i == -1){ %>
+                <option value="">No selection</option>
+                <% } else{ %>
                 <option value="<%= continents[i] %>"><%= continents[i] %></option>
-              <% } %>
+              <% }} %>
             </select>
           </div>
           <button type="submit" class="btn btn-primary">Filter</button>
@@ -30,11 +42,15 @@
         <h3>Sort by</h3>
         <form action="/library/sortByMostLiked" 
             method="GET">
-          <button type="submit" class="btn btn-primary" value="likes" name="mostLiked">Most liked</button>
+          <button type="submit" class="btn btn-primary" value="mostLiked" name="likes">Most liked</button>
         </form>
         <form action="/library/sortByPopularity" 
             method="GET">
-          <button type="submit" class="btn btn-primary" value="popularity" name="popularityHigh">Popularity</button>
+          <button type="submit" class="btn btn-primary" value="popularityHigh" name="popularity">Popularity</button>
+        </form>
+        <form action="/library/undiscoveredTreasures" 
+            method="GET">
+          <button type="submit" class="btn btn-primary" value="popularityLow" name="popularity">Undiscovered Treasures</button>
         </form>
         <!--/Sort-->
         <!--Remove all filters and sorts-->
@@ -47,30 +63,27 @@
     </div>
   </div>  
 
+  <!--Story snippet-->
   <div class="container col-10">
     <div class="row justify-content-center mt-5">
       <ul class="row list-unstyled">
-        <% if(!filterOn){for(var i=0; i<stories.length; i++) {%>
+        <% for(var i=0; i<stories.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <span><%= stories[i].user.userName%></span>
+            <span><%= stories[i].country%>, <%= stories[i].continent%></span>
             <a href="/story/<%= stories[i]._id%>">
               <h2><%= stories[i].title%></h2>
               <img class="img-fluid" src="<%= stories[i].image%>">
               <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
             </a>
           </li>
-        <% }} %>
-       <% if(filterOn){for(var i=0; i<stories.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <span><%= stories[i].user.userName%></span>
-            <a href="/story/<%= stories[i]._id%>">
-              <h2><%= stories[i].title%></h2>
-              <img class="img-fluid" src="<%= stories[i].image%>">
-              <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
-            </a>
-          </li>
-        <% }} %>
+        <% } %>
         </ul>
     </div>
+    <div class="col-6 mt-5">
+      <a class="btn btn-primary" href="/profile">Return to Profile</a>
+    </div>
   </div>  
+<!-- /Story snippet-->
+  
 <%- include('partials/footer') -%>

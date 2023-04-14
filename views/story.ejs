@@ -1,8 +1,16 @@
 <%- include('partials/header') -%>
 <div class="container">
+   <!--User info-->
+   <div>
+    <p><strong>User Name</strong>: <%= user.userName %></p>
+    <a href="/logout" class="col-3 btn btn-primary">Logout</a>
+  </div>
+  <!--/User info-->
   <div class="row justify-content-center mt-5">
     <div class="col-6">
+      <span><%= story.user.userName%></span>
       <h2><%= story.title %></h2>
+      <span><%= story.country%>, <%= story.continent%></span>
       <img class="img-fluid" src="<%= story.image%>" />
       <div class="row justify-content-between">
         
