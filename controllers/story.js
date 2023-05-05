@@ -8,9 +8,10 @@ module.exports = {
       //Since we have a session each req contains the logged-in users info: rez.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
-      const stories = await Story.find({ user: req.user.id });
+      const story = await Story.find({ user: req.user.id });
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { stories: stories[0], user: req.user, editStory:false });
+      res.render("profile.ejs", { story: story[0], user: req.user, editStory:false });
+
     } catch (err) {
       console.log(err);
     }
@@ -23,13 +24,11 @@ module.exports = {
       //id===642f2c9f533b48258c27a452
       const story = await Story.findById(req.params.id).populate('user', 'userName').lean();;
 
-      if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
-        story.usersWhoRead.push(req.user.id);
-        story.readBy++;
-       
-      }
-
       res.render("story.ejs", { story: story, user: req.user});
+      console.log(story.user._id)
+      console.log(story.user)
+      console.log("id" +  req.user.id)
+      console.log("_id" +  req.user._id)
     } catch (err) {
       console.log(err);
     }
@@ -67,6 +66,7 @@ module.exports = {
       });
     
       console.log("Story has been added!");
+      console.log(req.body);
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
@@ -157,8 +157,10 @@ module.exports = {
   // },
   deleteStory: async (req, res) => {
     try {
+      console.log(" delete function")
       // Find post by id
       let story = await Story.findById({ _id: req.params.id });
+      console.log("param id" + req.params.id)
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(story.cloudinaryId);
       // Delete post from db
@@ -166,20 +168,34 @@ module.exports = {
       console.log("Deleted story");
       res.redirect("/profile");
     } catch (err) {
+      console.log(" error delete function")
       res.redirect("/profile");
     }
   },
   editStory: async (req, res) => {
     try {
-      const stories = await Story.findById(req.params.id);
-      res.render("profile.ejs", { stories: stories, user: req.user, editStory:true});
+      const story = await Story.findById(req.params.id);
+      res.render("profile.ejs", { story: story, user: req.user, editStory:true});
     } catch (err) {
       console.log(err);
     }
   },
+  deleteImage: async (req, res) => {
+    try {
+      // Find post by id
+      let story = await Story.findById({ _id: req.params.id });
+      if(file){
+         // Delete image from cloudinary
+        await cloudinary.uploader.destroy(story.cloudinaryId);
+      }
+      console.log("Deleted image in cloudinary");
+      res.redirect("/profile");
+    } catch (err) {
+      res.redirect("/profile");
+    }
+  },
   updateStory: async (req, res) => {
     try {
-      const result = await cloudinary.uploader.upload(req.file.path);
 
       let story = await Story.findOneAndUpdate(
         { 
@@ -191,8 +207,7 @@ module.exports = {
             textContent: req.body.newTextContent,
             country: req.body.newCountry,
             continent: req.body.newContinent,
-            image: result.secure_url,
-            cloudinaryId: result.public_id,
+   
           },
 
         },
@@ -200,13 +215,13 @@ module.exports = {
           new:true,
         });
 
-        console.log("req")
-        console.log(req)
-        console.log("req bodyyyy")
-        console.log(req.body);
+        // console.log("req")
+        // console.log(req)
+        // console.log("req bodyyyy")
+        // console.log(req.body);
         console.log("new continent")
         console.log(req.body.newContinent);
-        res.render("profile.ejs", { stories: story, user: req.user, editStory:false});
+        res.render("profile.ejs", {story: story, user: req.user, editStory:false});
     
     } catch (err) {
        console.log(err);

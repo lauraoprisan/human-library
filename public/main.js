@@ -11,12 +11,16 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
             let output =   `<option value="">No selection</option>`
             const sorteData = data.sort((a,b)=>a.name.common >b.name.common ? 1 : -1)
             sorteData.forEach((country) => {
-                if(countryValue == country.name.common){
-                    //select the option that has the countryValue and add a selected attribute
-                    output += `<option value="${country.name.common}" selected>${country.name.common}</option>`
-                }else{
-                    output += `<option value="${country.name.common}">${country.name.common}</option>`
-                }
+          
+                    if(countryValue && countryValue == country.name.common){
+                        //select the option that has the countryValue and add a selected attribute
+                        output += `<option class="possible-country" value="${country.name.common}" selected>${country.name.common}</option>`
+                    }else{
+                        output += `<option class="possible-country" value="${country.name.common}">${country.name.common}</option>`
+                    }
+                
+                //after i select a country/continent I have to get the option chosen and set the option's value to that
+                //if option was clicked, set the option's value to that
                 
                 selectCountry.innerHTML = output
             })
@@ -26,6 +30,7 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
         })
     }),
 
+  
     //select the continent
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectContinent =document.querySelector("#continent")
@@ -56,6 +61,8 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
     })
 }
 
+// const chosenCountry = querySelectorAll(".possible-country")
+// chosenCountry.addEventListener("click", setValue)
 
 const filterCountry = document.querySelector("#filter-country")
 const filterContinent = document.querySelector("#filter-continent")

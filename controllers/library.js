@@ -17,6 +17,7 @@ module.exports = {
 
 
       res.render("library.ejs", { stories: stories, user: req.user, countries: sortedCountries, continents: sortedContinents, filterOn: false});
+      console.log(req.body)
     } catch (err) {
       console.log(err);
     }
@@ -44,8 +45,12 @@ module.exports = {
        const sortedContinents = uniqueContinents.sort((a,b)=>a >b ? 1 : -1)
       
     
-       res.render("library.ejs", { stories: stories, user: req.user, countries: sortedCountries, continents: sortedContinents, filterOn: true});
-      console.log(stories)
+       res.render("library.ejs", { stories: stories, countryChoice:req.query.country, continentsChoice:req.query.continent, user: req.user, countries: sortedCountries, continents: sortedContinents, filterOn: true});
+      console.log(allStories)
+      console.log(countryArr)
+      console.log(uniqueContinents)
+      console.log(sortedCountries)
+      console.log(sortedContinents)
     } catch (err) {
       console.log(err);
     }

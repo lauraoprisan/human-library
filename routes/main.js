@@ -13,6 +13,7 @@ router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, storyController.getProfile);
 router.get("/favorites", ensureAuth, storyController.getFavorites);
 router.get("/editStory/:id", ensureAuth, storyController.editStory);
+router.delete("/updateStory/:id", ensureAuth, storyController.deleteImage);
 router.put("/updateStory/:id", ensureAuth, storyController.updateStory);
 
 

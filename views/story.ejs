@@ -15,10 +15,10 @@
       <div class="row justify-content-between">
         
          <!--Like story-->
-         <%if(story.user.toString() !== user.id){ %>
+         <%if(story.user._id != user.id){ %>
           <form
             class="col-1"
-            action="/story/likeStory/<%= story.id %>?_method=PUT"
+            action="/story/likeStory/<%= story._id %>?_method=PUT"
             method="POST"
           >
             <button class="btn btn-primary fa fa-heart" type="submit"></button>
@@ -28,10 +28,10 @@
           <!-- /Like story-->
           
           <!--Favorite story-->
-          <%if(story.user.toString() !== user.id){ %>
+          <%if(story.user._id != user.id){ %>
             <form
               class="col-1"
-              action="/story/favoriteStory/<%= story.id %>"
+              action="/story/favoriteStory/<%= story._id %>"
               method="POST"
             >
               <button class="btn btn-primary fa fa-star" type="submit"></button>
@@ -42,11 +42,11 @@
           <!--Num of likes story-->
           <h3 class="col-4">Likes: <%= story.likes %></h3>
           <!-- /Num of likes story-->
-  
+
           <!--Delete story-->
-          <%if(story.user == user.id){ %>
+          <%if(story.user._id == user.id){ %>
           <form
-            action="/story/deleteStory/<%= story.id %>?_method=DELETE"
+            action="/story/deleteStory/<%= story._id %>?_method=DELETE"
             method="POST"
             class="col-1"
           >
