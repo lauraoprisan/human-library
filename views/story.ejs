@@ -6,14 +6,19 @@
     <a href="/logout" class="col-3 btn btn-primary">Logout</a>
   </div>
   <!--/User info-->
+  <!--The story-->
   <div class="row justify-content-center mt-5">
     <div class="col-6">
       <span><%= story.user.userName%></span>
-      <h2><%= story.title %></h2>
-      <span><%= story.country%>, <%= story.continent%></span>
+      <h2><%= story.title%></h2>
+      <!--Displaying the region and managing the comma-->
+      <span>
+        <%= story.country %><%if(story.country && story.continent ) { %>,<% }%> <%= story.continent%>
+      </span>
+      <!-- /Displaying the region and managing the comma-->
       <img class="img-fluid" src="<%= story.image%>" />
+      <!--User actions-->
       <div class="row justify-content-between">
-        
          <!--Like story-->
          <%if(story.user._id != user.id){ %>
           <form
@@ -24,9 +29,7 @@
             <button class="btn btn-primary fa fa-heart" type="submit"></button>
           </form>
           <%}%>
-          
           <!-- /Like story-->
-          
           <!--Favorite story-->
           <%if(story.user._id != user.id){ %>
             <form
@@ -38,11 +41,9 @@
             </form>
             <%}%>
           <!-- /Favorite story-->
-
           <!--Num of likes story-->
           <h3 class="col-4">Likes: <%= story.likes %></h3>
           <!-- /Num of likes story-->
-
           <!--Delete story-->
           <%if(story.user._id == user.id){ %>
           <form
@@ -54,20 +55,20 @@
           </form>
           <%}%>
           <!--/Delete story-->
-
-
-
-
       </div>
+      <!-- /User actions-->
     </div>
     <div class="col-3 mt-5">
       <p><%= story.textContent %></p>
     </div>
+    <!--Story's text-->
     <div class="col-6 mt-5">
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
       <a class="btn btn-primary" href="/library">Read other people's story</a>
     </div>
+    <!-- /Story's text-->
   </div>
+  <!-- /The story-->
 </div>
 
 <%- include('partials/footer') -%>

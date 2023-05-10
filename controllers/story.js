@@ -10,7 +10,7 @@ module.exports = {
       //Grabbing just the posts of the logged-in user
       const story = await Story.find({ user: req.user.id });
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { story: story[0], user: req.user, editStory:false });
+      res.render("profile.ejs", { story: story[0], user: req.user, editStory:false, errorMessage:false });
 
     } catch (err) {
       console.log(err);
@@ -49,6 +49,13 @@ module.exports = {
   },
   createStory: async (req, res) => {
     try {
+      // Check if required fields are present
+      if (!req.body.title || !req.body.textContent || !req.file) {
+        // Set error message and render the same page again
+        const errorMessage = 'Please provide a title, description and image!';
+        res.render("profile.ejs", {story:false, user:req.user, errorMessage: errorMessage, editStory:false, });
+      }
+      // /Check if required fields are present
       // Upload image to cloudinary
       const result = await cloudinary.uploader.upload(req.file.path);
 
@@ -175,7 +182,7 @@ module.exports = {
   editStory: async (req, res) => {
     try {
       const story = await Story.findById(req.params.id);
-      res.render("profile.ejs", { story: story, user: req.user, editStory:true});
+      res.render("profile.ejs", { story: story, user: req.user, editStory:true, errorMessage:false});
     } catch (err) {
       console.log(err);
     }
@@ -196,6 +203,15 @@ module.exports = {
   },
   updateStory: async (req, res) => {
     try {
+
+      // Check if required fields are present
+       if (!req.body.newTitle || !req.body.newTextContent) {
+        const oldStory = await Story.findById(req.params.id).populate('user', 'userName').lean();;
+        // Set error message and render the same page again
+        const errorMessage = 'Please provide a title and a description!';
+        res.render("profile.ejs", {story:oldStory, user:req.user, errorMessage: errorMessage, editStory:true, });
+      }
+      // /Check if required fields are present
 
       let story = await Story.findOneAndUpdate(
         { 

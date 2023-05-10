@@ -11,6 +11,6 @@ router.get("/", ensureAuth, libraryController.getStories);
 router.get("/filter", libraryController.filterStories)
 router.get("/sortByMostLiked", libraryController.sortByMostLiked)
 router.get("/sortByPopularity", libraryController.sortByPopularity)
-router.get("/undiscoveredTreasures", libraryController.sortByPopularity)
+router.get("/undiscoveredTreasures", libraryController.undiscoveredTreasures)
 
 module.exports = router;

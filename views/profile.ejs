@@ -13,17 +13,22 @@
       <div class="col-6">
           <div class="mt-5">
             <h2>Add a story</h2>
+            <!--Error message for empty required fields-->
+            <% if(errorMessage){ %>
+              <span class="error-message"><%= errorMessage%></span>
+            <% } %>
+            <!-- /Error message for empty required fields-->
             <form action="/story/createStory" enctype="multipart/form-data" method="POST" id="add-story">
               <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
+                  <label for="title" class="form-label">Title *</label>
                   <input type="text" class="form-control" id="title" name="title">
               </div>
               <div class="mb-3">
-                <label for="textContent" class="form-label">textContent</label>
+                <label for="textContent" class="form-label">textContent *</label>
                 <textarea class="form-control" id="textContent" name="textContent"></textarea>
               </div>
               <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
+                <label for="imgUpload" class="form-label">Image *</label>
                 <input type="file" class="form-control" id="imageUpload" name="file">
               </div>
               <div class="mb-3">
@@ -38,6 +43,7 @@
                   <option id="continentChoice"></option>
                 </select>
               </div>
+              <span>* Required fields</span>
               <button type="submit" class="btn btn-primary" value="Upload">Submit first story</button>
             </form>
           </div>
@@ -49,13 +55,17 @@
   <div class="col-6">
       <div class="mt-5">
         <h2>Edit your story</h2>
+        <% if(errorMessage){ %>
+          <span class="error-message"><%= errorMessage%></span>
+        <% } %>
         <form action="/updateStory/<%= story._id %>?_method=PUT"  method="POST">
+          <!-- enctype="multipart/form-data"  -->
           <div class="mb-3">
-              <label for="newTitle" class="form-label">Title</label>
+              <label for="newTitle" class="form-label">Title *</label>
               <input type="text" class="form-control" id="title" name="newTitle" value="<%= story.title%>">
           </div>
           <div class="mb-3">
-            <label for="newTextContent" class="form-label">textContent</label>
+            <label for="newTextContent" class="form-label">textContent *</label>
             <textarea class="form-control" id="textContent" name="newTextContent" wrap ><%= story.textContent%></textarea>
           </div>
           <!-- <div class="mb-3">
@@ -72,7 +82,7 @@
             <select name="newContinent" id="continent" class="form-control"></select>
             <option id="continentChoice" value="<%= story.continent%>"></option>
           </div>
-         
+          <span>* Required fields</span>
           <button type="submit" class="btn btn-primary" value="Upload">Save changes</button> 
         </form>
       </div>
@@ -88,14 +98,20 @@
             <a href="/story/<%= story._id%>">
               <h2><%= story.title%></h2>
               <img class="img-fluid" src="<%= story.image%>">
+              <% if(story.textContent.split(" ").length > 30){%>
               <p><%= story.textContent.split(" ").slice(0,30).join(" ")%>...</p>
+               <% } else { %> 
+              <p><%= story.textContent%></p>
+              <% } %>
             </a>
           </li>
         </ul>
+        <% if(!editStory){ %>
           <div class="row justify-content-center mt-5">
             <a class="btn btn-primary" href="/editStory/<%= story._id%>">Edit story</a>
           </div>
         <% } %> 
+      <% } %> 
         <div class="row justify-content-center mt-5">
           <a class="btn btn-primary" href="/favorites">See your favorites</a>
         </div> 

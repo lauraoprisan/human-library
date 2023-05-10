@@ -1,5 +1,6 @@
 const addStory = document.querySelector("#add-story")
-if (window.location.pathname.includes('profile') && addStory || window.location.pathname.includes('editStory') ){
+const submitError = document.querySelector(".error-message")
+if (window.location.pathname.includes('profile') && addStory || window.location.pathname.includes('editStory') || submitError){
     //select the country
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectCountry =document.querySelector("#country")

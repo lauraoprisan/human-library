@@ -1,9 +1,10 @@
-Added:
-- added updateStory (also country,continent)
-- added usernames, countries and continents on several pages
-- transfomed filter into a choice between country and continent
+Solved:
+- deleteStory error
+- solve null fields
+- remove empty option and null result when filtering 
 
 
-Problems with the filter:
+Problems:
 - work on the the UI after filtering (let country/continent be chosen)
+- add editing for image, unlike button
 

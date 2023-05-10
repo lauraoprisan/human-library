@@ -19,7 +19,7 @@
               <% for (let i = -1; i < countries.length; i++) { %>
                 <% if(i == -1){ %>
                 <option value="">No selection</option>
-                <% } else{ %>
+                <% } else {  %>
                 <option value="<%= countries[i] %>"><%= countries[i] %></option>
               <% }} %>
             </select>
@@ -30,7 +30,7 @@
               <% for (let i = -1; i < continents.length; i++) { %>
                 <% if(i == -1){ %>
                 <option value="">No selection</option>
-                <% } else{ %>
+                <% } else {  %>
                 <option value="<%= continents[i] %>"><%= continents[i] %></option>
               <% }} %>
             </select>
@@ -70,11 +70,20 @@
         <% for(var i=0; i<stories.length; i++) {%>
           <li class="col-6 justify-content-between mt-5">
             <span><%= stories[i].user.userName%></span>
-            <span><%= stories[i].country%>, <%= stories[i].continent%></span>
+            <!--Displaying the region and managing the comma-->
+            <span>
+              <%= stories[i].country%><%if(stories[i].country && stories[i].continent ){ %>,<%}%>
+              <%= stories[i].continent%>
+            </span>
+            <!-- /Displaying the region and managing the comma-->
             <a href="/story/<%= stories[i]._id%>">
               <h2><%= stories[i].title%></h2>
               <img class="img-fluid" src="<%= stories[i].image%>">
-              <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
+              <% if(stories[i].textContent.split(" ").length > 30){%>
+                <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
+                 <% } else { %> 
+                <p><%= stories[i].textContent%></p>
+                <% } %>
             </a>
           </li>
         <% } %>
