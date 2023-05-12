@@ -85,3 +85,13 @@ function showContinents(){
     countryOptions.classList.add("hidden")
     continentOptions.classList.remove("hidden")
 }
+
+//update image
+const updateImgBtn = document.querySelector("#update-image-btn")
+const editImageForm = document.querySelector("#edit-image-form")
+
+updateImgBtn.addEventListener("click", showEditImage)
+function showEditImage(){
+    editImageForm.classList.remove("hidden")
+    console.log("hei")
+}

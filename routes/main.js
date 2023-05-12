@@ -11,10 +11,11 @@ const { ensureAuth } = require("../middleware/auth");
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
 router.get("/profile", ensureAuth, storyController.getProfile);
-router.get("/favorites", ensureAuth, storyController.getFavorites);
-router.get("/editStory/:id", ensureAuth, storyController.editStory);
-router.delete("/updateStory/:id", ensureAuth, storyController.deleteImage);
-router.put("/updateStory/:id", ensureAuth, storyController.updateStory);
+router.get("/favorites", storyController.getFavorites);
+router.get("/editStory/:id", storyController.editStory);
+router.delete("/updateImage/:id", storyController.deleteImage);
+router.put("/updateImage/:id", upload.single("file"), storyController.updateImage);
+router.put("/updateStory/:id", storyController.updateStory);
 
 
 //Routes for user login/signup

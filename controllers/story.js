@@ -201,6 +201,32 @@ module.exports = {
       res.redirect("/profile");
     }
   },
+  updateImage: async (req, res) => {
+    try {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      let story = await Story.findOneAndUpdate(
+        { 
+            _id: req.params.id
+        }, 
+        {
+          $set: {
+            image: result.secure_url,
+            cloudinaryId: result.public_id, 
+          },
+
+        },
+        {
+          new:true,
+        });
+
+       
+        res.render("profile.ejs", {story: story, user: req.user, editStory:true, errorMessage: false});
+    
+    } catch (err) {
+       console.log(err);
+    }
+  
+},
   updateStory: async (req, res) => {
     try {
 
