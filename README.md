@@ -1,6 +1,5 @@
 Solved:
-- add editing for image
-- made the library controller more efficient
+- started working at the frontend (home page)
 
 
 Problems:
