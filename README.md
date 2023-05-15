@@ -1,5 +1,5 @@
 Solved:
-- started working at the frontend (home page)
+- updating the frontend (home page)
 
 
 Problems:

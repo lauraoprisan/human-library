@@ -7,7 +7,7 @@ const { ensureAuth } = require("../middleware/auth");
 //Since linked from server js treat each path as:
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
-router.get("/", ensureAuth, libraryController.getStories);
+router.get("/", libraryController.getStories);
 router.get("/filter", libraryController.filterStories)
 router.get("/sortByMostLiked", libraryController.sortByMostLiked)
 router.get("/sortByPopularity", libraryController.sortByPopularity)
