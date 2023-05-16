@@ -1,5 +1,5 @@
-Solved:
-- updating the frontend (home page)
+Working on:
+- updating the frontend (home page, library page)
 
 
 Problems:

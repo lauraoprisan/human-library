@@ -1,8 +1,8 @@
 <%- include('partials/header') -%>
 
 <main class="container">
-  <div class="row justify-content-center">
-    <section class="col-6 mt-5">
+  <div >
+    <section class="">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
       <div class="alert alert-danger"><%= el.msg %></div>
       <% }) %> <% } %> <% if (locals.messages.info) { %> <%
@@ -16,7 +16,7 @@
           >
           <input
             type="email"
-            class="form-control"
+          
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             name="email"
@@ -26,7 +26,7 @@
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input
             type="password"
-            class="form-control"
+        
             id="exampleInputPassword1"
             name="password"
           />

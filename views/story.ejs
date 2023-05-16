@@ -1,10 +1,11 @@
 <%- include('partials/header') -%>
 <div class="container">
    <!--User info-->
+   <% if(user){%>
    <div>
     <p><strong>User Name</strong>: <%= user.userName %></p>
-    <a href="/logout" class="col-3 btn btn-primary">Logout</a>
   </div>
+  <% }%>
   <!--/User info-->
   <!--The story-->
   <div class="row justify-content-center mt-5">
@@ -20,7 +21,7 @@
       <!--User actions-->
       <div class="row justify-content-between">
          <!--Like story-->
-         <%if(story.user._id != user.id){ %>
+         <%if(user && story.user._id != user.id){ %>
           <form
             class="col-1"
             action="/story/likeStory/<%= story._id %>?_method=PUT"
@@ -31,7 +32,7 @@
           <%}%>
           <!-- /Like story-->
           <!--Favorite story-->
-          <%if(story.user._id != user.id){ %>
+          <%if(user && story.user._id != user.id){ %>
             <form
               class="col-1"
               action="/story/favoriteStory/<%= story._id %>"
@@ -45,7 +46,7 @@
           <h3 class="col-4">Likes: <%= story.likes %></h3>
           <!-- /Num of likes story-->
           <!--Delete story-->
-          <%if(story.user._id == user.id){ %>
+          <%if( user && story.user._id == user.id){ %>
           <form
             action="/story/deleteStory/<%= story._id %>?_method=DELETE"
             method="POST"
@@ -63,8 +64,10 @@
     </div>
     <!--Story's text-->
     <div class="col-6 mt-5">
+      <% if(user){%>
       <a class="btn btn-primary" href="/profile">Return to Profile</a>
-      <a class="btn btn-primary" href="/library">Read other people's story</a>
+      <% }%>
+      <a class="btn btn-primary" href="/library">Read other stories</a>
     </div>
     <!-- /Story's text-->
   </div>

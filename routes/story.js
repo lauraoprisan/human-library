@@ -8,7 +8,7 @@ const { ensureAuth } = require("../middleware/auth");
 //Since linked from server js treat each path as:
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
-router.get("/:id", ensureAuth, storyController.getStory);
+router.get("/:id", storyController.getStory);
 router.put("/:id", ensureAuth, storyController.viewedStory);
 
 //Enables user to create post w/ cloudinary for media uploads

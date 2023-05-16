@@ -5,7 +5,6 @@
 <!--User info-->
       <div>
         <p><strong>User Name</strong>: <%= user.userName %></p>
-        <a href="/logout" class="col-3 btn btn-primary">Logout</a>
       </div>
 <!--/User info-->
 <!--Add story-->
@@ -112,16 +111,14 @@
           </div>
         <% } %> 
         <% if(editStory){ %>
-          <div class="row justify-content-center mt-5" id="update-image-btn">
-            <span  class="btn btn-primary" >Update image</span>
-          </div>
+
 
           <form action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
             <div class="mb-3">
               <label for="imgUpload" class="form-label">Image</label>
               <input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
             </div>
-            <button type="submit" class="btn btn-primary" value="Upload">Save changes</button> 
+            <button type="submit" class="btn btn-primary" value="Upload">Change image</button> 
           </form>
           <% } %> 
       <% } %> 
