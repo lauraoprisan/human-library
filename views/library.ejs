@@ -1,8 +1,8 @@
 <%- include('partials/header') -%>
  <!--User info-->
 <% if(user){%>
- <div>
-  <p><strong>User Name</strong>: <%= user.userName %></p>
+ <div class="container username">
+  <p>Hello, <%= user.userName %></p>
 </div>
 <% }%>
 <!--/User info-->
@@ -14,7 +14,7 @@
 <!--Filter/sort-->
     <section class="filter">
 <!--Filter-->
-        <h3>Filter</h3>
+        <h3 class="filter-subtitle">Filter</h3>
         <form action="/library/filter"
             method="GET">
           <div class="flex-col">
@@ -72,21 +72,29 @@
             <!-- <span><%= stories[i].user.userName%></span> -->
             <a href="/story/<%= stories[i]._id%>">
                 <div class="story-details">
-                  <h2><%= stories[i].title%></h2>
+                  <h3><%= stories[i].title%></h3>
                   <!--Date-->
                   <span class="date">
                     <%= stories[i].createdAt.getDate()%>.<%= stories[i].createdAt.getMonth()%>.<%= stories[i].createdAt.getFullYear()%>
                   </span>
                   <!--/Date-->
                   <!--Displaying the region and managing the comma-->
-                    <span>
+                    <span class="region-details">
                       <%= stories[i].country%><%if(stories[i].country && stories[i].continent ){ %>,<%}%>
                       <%= stories[i].continent%>
                     </span>
                   <!-- /Displaying the region and managing the comma-->
                 </div>
                 <img class="img-fluid" src="<%= stories[i].image%>">
-                <div class="story-text">
+                <div class="flex-row reaction-display">
+                  <span>
+                    <i class="fa-solid fa-book-open" style="color: #857a7a;"> <%= stories[i].readBy%></i>
+                  </span>
+                  <span>
+                    <i class="fa-solid fa-thumbs-up" style="color: #857a7a;"> <%= stories[i].likes%></i>
+                  </span>
+                </div>
+                <div class="story-text-snippet">
                   <% if(stories[i].textContent.split(" ").length > 30){%>
                     <p><%= stories[i].textContent.split(" ").slice(0,30).join(" ")%>...</p>
                      <% } else { %> 
@@ -104,14 +112,6 @@
   </section>
 <!-- /Library content-->
  
-
- 
-    <!-- <% if(user){%>
-      <div >
-        <a  href="/profile">Return to Profile</a>
-      </div>
-    <%}%> -->
-  
 
   
 <%- include('partials/footer') -%>

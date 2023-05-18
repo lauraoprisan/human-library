@@ -1,7 +1,9 @@
+/* GENERAL STYLING */
 *{
     margin:0;
     padding: 0;
     font-size: 16px;
+    font-family: 'PT Serif', serif;
 }
 
 .container{
@@ -13,14 +15,80 @@
     max-width: none;
 
 }
+li{
+    list-style: none;
+}
+
+h2{
+    font-size: 1.6rem;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+a:hover{
+    color:red;
+}
+
+.hidden{
+    display:none;
+}
+
+.chosen-btn{
+    background-color: rgba(234, 155, 52, 0.475);
+}
+
+/*temporary styling */
+span{
+    display:block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin:10px 0;
+}
+
+span{
+    margin:0;
+    padding: 0;
+}
+
+.flex-row{
+    display:flex;
+}
+
+.title-section{
+    margin-bottom:50px;
+}
+
+span, p, button, label, option{
+    font-size: 1.3rem;
+}
+
+.username{
+    align-items: flex-start;
+    margin-top:20px;
+}
+
+.asterix{
+    font-size: 1rem;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* /GENERAL STYLING */
 
 /* HEADER */
 header{
-   background-color: #fff;
+   background-color:  rgb(205, 205, 205);
 }
 
 header .container{
-    height:50px;
+    height:70px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -34,17 +102,17 @@ header nav{
 header .container ul{
     display:flex;
     justify-content: flex-end;
-   
+    align-items: center; 
+    margin-bottom: 0;
 }
 
 header li{
-    border-bottom: 1px solid gray;
-    padding-bottom:5px;
     margin-left:30px;
 }
 
 header li a{
     color:darkslategrey;
+    font-size: 1.2rem;
 }
 
 
@@ -198,6 +266,11 @@ input{
 .single-story{
     flex-basis:50%;
     padding:0 10px;
+    margin-bottom: 50px;
+}
+
+.filter-subtitle{
+    margin-bottom:20px;
 }
 
 .sort-subtitle{
@@ -208,7 +281,6 @@ input{
 .sort-btn{
     border:none;
     background-color:transparent;
-    font-size: 1.3rem;
 }
 
 .remove-all-btn{
@@ -227,59 +299,142 @@ input{
 
 .date{
     color:grey;
+    font-size: 1rem;
+}
+
+.region-details{
+    font-size: 1.1rem;
 }
 
 .single-story img{
     /* width:500px;
     height:300px;
     object-fit: cover; */
+
+}
+
+.story-text-snippet{
+    margin-top:20px;
+}
+
+.reaction-display span{
+    margin-right:15px;
+}
+
+select option{
+    font-size: 1.3rem;
+}
+/* /Library*/
+
+/*Profile*/
+
+.profile-section{
+
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+.profile-subtitle{
+    align-self: flex-start;
+    border-bottom: 3px solid rgb(234, 155, 52);
+    padding-bottom: 5px;
+
+}
+
+.create-edit-story{
+    align-self:  flex-start;
+    margin-top: 50px;
+    margin-left:50px;
+}
+
+.create-edit-story div{
+    margin-bottom:30px;
+}
+
+.create-edit-story p{
+    margin:50px 0;
+}
+
+.create-edit-story .highlight-button{
+    font-size:1.3rem;
+}
+
+.create-edit-story input, .create-edit-story select{
+    width:300px;
+}
+
+.create-edit-story button{
+    align-self: flex-end;
+}
+
+.insert-text {
+    resize:none;
+    overflow: hidden;
+    min-height: 50px;
    
 
 }
 
+.edit-image{
+    display: flex;
+    flex-direction: row;
+
+    margin-top:100px;
+}
+
+.edit-image > *{
+    margin-right:100px;
+}
+
+
+
+.edit-image img{
+   width:30%;
+}
+
+
+.main-profile-story {
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:50px 0;
+    padding:0 5%;
+}
+
+.main-profile-story h3{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.main-profile-story img{
+    width:100%;
+}
+.main-profile-story .reaction-display{
+    justify-content: flex-start;
+    margin-top:40px;
+    width:100%;
+}
 .story-text{
-    margin-top:20px;
-}
-/* /Library*/
-
-/*-------------------------------------------*/
-
-/* GENERAL STYLING */
-li{
-    list-style: none;
+    margin-top:50px;
+    white-space: pre-wrap;
 }
 
-h2{
-    font-size: 1.6rem;
+.main-profile-story i {
+    margin-right:20px;
 }
 
-a{
-    text-decoration: none;
-    color:black;
+.profile-actions-buttons{
+    display:flex;
+    position:absolute;
+    top:0;
+    right:5%;
 }
 
-a:hover{
-    color:red;
+.profile-actions-buttons button{
+    border:none;
 }
 
-.hidden{
-    display:none;
+.profile-actions-buttons > *{
+    margin-left:20px;
 }
-
-.chosen-btn{
-    background-color: rgba(234, 155, 52, 0.475);
-}
-
-/*temporary styling */
-span{
-    display:block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin:10px 0;
-}
-
-span{
-    margin:0;
-    padding: 0;
-}
-/* /GENERAL STYLING */
+/* /Profile*/

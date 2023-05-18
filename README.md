@@ -1,5 +1,5 @@
 Working on:
-- updating the frontend (home page, library page)
+- updating the frontend (library page, profile page)
 
 
 Problems:

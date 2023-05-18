@@ -1,135 +1,157 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
 
 <!--User info-->
-      <div>
-        <p><strong>User Name</strong>: <%= user.userName %></p>
-      </div>
+<!-- <div class="container username">
+  <p>Hello, <%= user.userName %></p>
+</div> -->
 <!--/User info-->
-<!--Add story-->
-      <% if(!story) { %>
-      <div class="col-6">
-          <div class="mt-5">
-            <h2>Add a story</h2>
-            <!--Error message for empty required fields-->
-            <% if(errorMessage){ %>
-              <span class="error-message"><%= errorMessage%></span>
-            <% } %>
-            <!-- /Error message for empty required fields-->
-            <form action="/story/createStory" enctype="multipart/form-data" method="POST" id="add-story">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title *</label>
-                  <input type="text" class="form-control" id="title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="textContent" class="form-label">textContent *</label>
-                <textarea class="form-control" id="textContent" name="textContent"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image *</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
-              </div>
-              <div class="mb-3">
-                <label for="country" class="form-label">Country</label>
-                <select name="country" id="country" class="form-control">
-                  <option id="countryChoice" ></option>
-                </select>  
-              </div>
-              <div class="mb-3">
-                <label for="continent" class="form-label">Continent</label>
-                <select name="continent" id="continent" class="form-control">
-                  <option id="continentChoice"></option>
-                </select>
-              </div>
-              <span>* Required fields</span>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit first story</button>
-            </form>
-          </div>
-      </div>
+<!--Add story / if there is no story-->
+
+<section class="profile-section">
+  <div class="container">
+    <% if(!story) { %>
+    <h2 class="profile-subtitle">Add your story</h2>
+    <!--Error message for empty required fields-->
+    <% if(errorMessage){ %>
+      <span class="error-message"><%= errorMessage%></span>
     <% } %>
-<!--/Add story-->
-<!--edit story-->
-<% if(editStory){ %>
-  <div class="col-6">
-      <div class="mt-5">
-        <h2>Edit your story</h2>
-        <% if(errorMessage){ %>
-          <span class="error-message"><%= errorMessage%></span>
-        <% } %>
-        <form action="/updateStory/<%= story._id %>?_method=PUT " method="POST">
-         
-          <div class="mb-3">
-              <label for="newTitle" class="form-label">Title *</label>
-              <input type="text" class="form-control" id="title" name="newTitle" value="<%= story.title%>">
-          </div>
-          <div class="mb-3">
-            <label for="newTextContent" class="form-label">textContent *</label>
-            <textarea class="form-control" id="textContent" name="newTextContent" wrap ><%= story.textContent%></textarea>
-          </div>
-          <!-- <div class="mb-3">
-            <label for="imgUpload" class="form-label">Image</label>
-            <input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
-          </div> -->
-          <div class="mb-3">
-            <label for="newCountry" class="form-label">Country</label>
-            <select name="newCountry" id="country" class="form-control"></select>
-            <option id="countryChoice" value="<%= story.country%>"></option>
-          </div>
-          <div class="mb-3">
-            <label for="newContinent" class="form-label">Continent</label>
-            <select name="newContinent" id="continent" class="form-control"></select>
-            <option id="continentChoice" value="<%= story.continent%>"></option>
-          </div>
-          <span>* Required fields</span>
-          <button type="submit" class="btn btn-primary" value="Upload">Save changes</button> 
-        </form>
+    <!-- /Error message for empty required fields-->
+    <form class="create-edit-story" action="/story/createStory" enctype="multipart/form-data" method="POST" id="add-story">
+      <div>
+          <label for="title" class="form-label">Title *</label>
+          <input type="text" class="form-control" id="title" name="title">
       </div>
+      <div>
+        <label for="imgUpload" class="form-label">Image *</label>
+        <input type="file" class="form-control" id="imageUpload" name="file">
+      </div>
+      <div class="insert-text">
+        <label for="textContent" class="form-label">Story *</label>
+        <textarea oninput="auto_grow(this)" class="form-control" id="textContent" name="textContent"></textarea>
+      </div>
+      <p>You can omit the information below, but it helps other people filter the stories they would like to discover. It is always very interesting to find out more about different cultures.</p>
+      <div>
+        <label for="country" class="form-label">Country</label>
+        <select name="country" id="country" class="form-control">
+          <option id="countryChoice" ></option>
+        </select>  
+      </div>
+      <div>
+        <label for="continent" class="form-label">Continent</label>
+        <select name="continent" id="continent" class="form-control">
+          <option id="continentChoice"></option>
+        </select>
+      </div>
+      <span class="asterix">* Required fields</span>
+      <button type="submit" class="highlight-button" value="Upload">Post</button>
+    </form>
+    <% } %>
+
   </div>
-<% } %>
-<!--/edit story-->
-
-
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% if(story){%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/story/<%= story._id%>">
-              <h2><%= story.title%></h2>
-              <img class="img-fluid" src="<%= story.image%>">
-              <% if(story.textContent.split(" ").length > 30){%>
-              <p><%= story.textContent.split(" ").slice(0,30).join(" ")%>...</p>
-               <% } else { %> 
-              <p><%= story.textContent%></p>
-              <% } %>
-            </a>
-          </li>
-        </ul>
-        <% if(!editStory){ %>
-          <div class="row justify-content-center mt-5">
-            <a class="btn btn-primary" href="/editStory/<%= story._id%>">Edit story</a>
-          </div>
-        <% } %> 
-        <% if(editStory){ %>
-
-
-          <form action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
+</section>
+<!--/Add story-->
+<!--edit story / if there is a story-->
+    <% if(editStory){ %>
+      <!--edit the story-->
+      <!--update the image-->
+<section class="profile-section">
+  <div class="container">
+        <h2 class="profile-subtitle">Update the image</h2>
+        <div class="edit-image">
+      
+          <form class="create-edit-story" action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
             <div class="mb-3">
               <label for="imgUpload" class="form-label">Image</label>
               <input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
             </div>
-            <button type="submit" class="btn btn-primary" value="Upload">Change image</button> 
+            <button type="submit" class="highlight-button" value="Upload">Change image</button> 
           </form>
-          <% } %> 
-      <% } %> 
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/favorites">See your favorites</a>
-        </div> 
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/library">Read people's story</a>
-        </div>  
-      </div>  
-    </div>
+          <img class="img-fluid" src="<%= story.image%>">
+        </div>
   </div>
-</div>
+</section>
+      <!-- /update the image-->
+<section class="profile-section">
+  <div class="container">
+        <h2 class="profile-subtitle">Edit your story</h2>
+        <% if(errorMessage){ %>
+          <span class="error-message"><%= errorMessage%></span>
+        <% } %>
+        <form class="create-edit-story" action="/updateStory/<%= story._id %>?_method=PUT " method="POST">
+          <div>
+              <label for="newTitle" class="form-label">Title *</label>
+              <input type="text" class="form-control" id="title" name="newTitle" value="<%= story.title%>">
+          </div>
+          <div class="insert-text">
+            <label for="newTextContent" class="form-label">Story *</label>
+            <textarea oninput="auto_grow(this)" class="form-control" id="textContent" name="newTextContent" wrap ><%= story.textContent%></textarea>
+          </div>
+          <div>
+            <label for="newCountry" class="form-label">Country</label>
+            <select name="newCountry" id="country" class="form-control"></select>
+            <option id="countryChoice" value="<%= story.country%>"></option>
+          </div>
+          <div>
+            <label for="newContinent" class="form-label">Continent</label>
+            <select name="newContinent" id="continent" class="form-control"></select>
+            <option id="continentChoice" value="<%= story.continent%>"></option>
+          </div>
+          <span class="asterix">* Required fields</span>
+          <button type="submit" class="highlight-button" value="Upload">Save changes</button> 
+        </form>
+  </div>
+</section>
+      <!-- /edit the story-->
+
+<% } %>
+<!--/edit story-->
+<!--Static profile (there is a story and no editing)-->
+
+<% if(!editStory && story){ %>
+  <section class="profile-section">
+    <div class="container">
+      <h2 class="profile-subtitle">Your story</h2>
+      <div class="main-profile-story">
+        <h3><%= story.title%></h3>
+        <div class="story-details center">
+          <!--Date-->
+          <span class="date">
+          <%= story.createdAt.getDate()%>.<%= story.createdAt.getMonth()%>.<%= story.createdAt.getFullYear()%>
+          </span>
+          <!--/Date-->
+          <!--Displaying the region and managing the comma-->
+          <span class="region-details">
+            <%= story.country%><%if(story.country && story.continent ){ %>,<%}%>
+            <%= story.continent%>
+          </span>
+          <!-- /Displaying the region and managing the comma-->
+        </div>
+        <img class="img-fluid" src="<%= story.image%>">
+        <div class="flex-row reaction-display">
+            <i class="fa-solid fa-book-open fa-lg" style="color: #857a7a;"> <%= story.readBy%></i>
+            <i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"> <%= story.likes%></i>
+        </div>
+        <p class="story-text"><%= story.textContent%></p>
+        <div class="profile-actions-buttons">
+          <a href="/editStory/<%= story._id%>">
+            <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #698ece;"></i>
+          </a>
+          <form
+          action="/story/deleteStory/<%= story._id %>?_method=DELETE"
+          method="POST"
+         
+        >
+          <button class="fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
+        </form>
+          <!-- <i class="fa-solid fa-trash fa-2xl" style="color: #b45050;"></i> -->
+        </div>
+      </div>
+<% } %> 
+<!-- /Static profile (there is a story and no editing)-->
+
+  </div>
+</section>
+   
+
+
 <%- include('partials/footer') -%>
