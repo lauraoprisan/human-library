@@ -100,7 +100,13 @@ function showEditImage(){
 //responsive textarea field
 
 function auto_grow(element) {
-    element.style.height = "5px";
+    element.style.height = "auto";
     element.style.height = (element.scrollHeight)+"px";
+ 
 }
 
+  // Trigger auto_grow function after the page loads
+//   window.addEventListener('load', function() {
+//     const textarea = document.querySelector('.edit-textarea');
+//     auto_grow(textarea)
+//   });

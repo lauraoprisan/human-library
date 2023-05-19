@@ -66,7 +66,7 @@ span, p, button, label, option{
 }
 
 .username{
-    align-items: flex-start;
+    align-self: flex-start;
     margin-top:20px;
 }
 
@@ -209,7 +209,7 @@ input{
 
 /* /LOGIN*/
 
-/*Library*/
+/*Library + favorite page*/
 .title-section{
     text-align: center;
 }
@@ -255,7 +255,10 @@ input{
     padding-left:10%;
     padding-right:0;
     max-width: none;
+}
 
+.fav-section{
+    padding-left:0;
 }
 
 .stories-snippets{
@@ -317,19 +320,19 @@ input{
     margin-top:20px;
 }
 
-.reaction-display span{
+.reaction-display span, .reaction-display i{
     margin-right:15px;
 }
 
 select option{
     font-size: 1.3rem;
 }
-/* /Library*/
+/* /Library  + favorite page*/
 
-/*Profile*/
+/*Profile + story*/
 
-.profile-section{
-
+.profile-section, .story-page-section{
+    min-height: 90vh;
     margin-top:50px;
     margin-bottom:50px;
 }
@@ -367,11 +370,10 @@ select option{
     align-self: flex-end;
 }
 
-.insert-text {
+textarea {
     resize:none;
     overflow: hidden;
     min-height: 50px;
-   
 
 }
 
@@ -393,7 +395,7 @@ select option{
 }
 
 
-.main-profile-story {
+.main-profile-story{
     position: relative;
     display:flex;
     flex-direction: column;
@@ -409,7 +411,7 @@ select option{
 .main-profile-story img{
     width:100%;
 }
-.main-profile-story .reaction-display{
+.reaction-display{
     justify-content: flex-start;
     margin-top:40px;
     width:100%;
@@ -423,18 +425,74 @@ select option{
     margin-right:20px;
 }
 
-.profile-actions-buttons{
+.user-actions-buttons{
     display:flex;
     position:absolute;
     top:0;
     right:5%;
 }
 
-.profile-actions-buttons button{
+.user-actions-buttons button{
     border:none;
 }
 
-.profile-actions-buttons > *{
-    margin-left:20px;
+.user-actions-buttons > *{
+    margin-left:30px;
 }
-/* /Profile*/
+
+.create-edit-story{
+    width:100%;
+}
+.edit-textarea{
+    width:90%;
+}
+/* /Profile + story*/
+
+/* Story*/
+.story-page-content {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:50px 0;
+    padding:0 5%;
+}
+.story-page-content button{
+    border:none;
+}
+.story-actions-buttons{
+    display:flex;
+   
+}
+
+.interact-buttons{
+    justify-content: center;
+    width:100%;
+}
+
+.interact-buttons button{
+    margin:40px 40px 0;
+}
+
+/* /Story*/
+
+
+/*Login/signup*/
+.login-signup-section{
+    min-height:100vh;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login-img{
+   background-image: url("img/world.jpg");
+   background-position: center;
+   background-size: cover;
+   height: 90vh;
+   width:500px;
+}
+
+/* /Login/signup*/
+

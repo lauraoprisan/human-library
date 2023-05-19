@@ -122,15 +122,15 @@ module.exports = {
   },
   getFavorites: async (req, res) => {
     try {
-      //Since we have a session each req contains the logged-in users info: rez.user
+      //Since we have a session each req contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
 
       const stories = await Favorite.find({ user: req.user.id }).populate("story");
-      const validFavorites = stories.filter(fav => fav.story);
+      const validFavorites = stories.map(fav => fav.story);
       //Sending post data from mongodb and user data to ejs template
       res.render("favorites.ejs", { stories: validFavorites, user: req.user });
-      console.log(stories)
+      console.log(validFavorites)
     } catch (err) {
       console.log(err);
     }

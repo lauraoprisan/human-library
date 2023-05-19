@@ -1,6 +1,8 @@
 <%- include('partials/header') -%>
 
-<main class="container">
+<section class="container login-signup-section">
+  <div class="login-img">
+  </div>
   <div >
     <section class="">
       <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
@@ -35,6 +37,6 @@
       </form>
     </section>
   </div>
-</main>
+</section>
 
 <%- include('partials/footer') -%>

@@ -46,77 +46,64 @@
       <button type="submit" class="highlight-button" value="Upload">Post</button>
     </form>
     <% } %>
-
-  </div>
-</section>
 <!--/Add story-->
 <!--edit story / if there is a story-->
-    <% if(editStory){ %>
-      <!--edit the story-->
-      <!--update the image-->
-<section class="profile-section">
-  <div class="container">
-        <h2 class="profile-subtitle">Update the image</h2>
-        <div class="edit-image">
-      
-          <form class="create-edit-story" action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
-            <div class="mb-3">
-              <label for="imgUpload" class="form-label">Image</label>
-              <input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
-            </div>
-            <button type="submit" class="highlight-button" value="Upload">Change image</button> 
-          </form>
-          <img class="img-fluid" src="<%= story.image%>">
-        </div>
-  </div>
-</section>
-      <!-- /update the image-->
-<section class="profile-section">
-  <div class="container">
-        <h2 class="profile-subtitle">Edit your story</h2>
-        <% if(errorMessage){ %>
-          <span class="error-message"><%= errorMessage%></span>
-        <% } %>
-        <form class="create-edit-story" action="/updateStory/<%= story._id %>?_method=PUT " method="POST">
-          <div>
-              <label for="newTitle" class="form-label">Title *</label>
-              <input type="text" class="form-control" id="title" name="newTitle" value="<%= story.title%>">
-          </div>
-          <div class="insert-text">
-            <label for="newTextContent" class="form-label">Story *</label>
-            <textarea oninput="auto_grow(this)" class="form-control" id="textContent" name="newTextContent" wrap ><%= story.textContent%></textarea>
-          </div>
-          <div>
-            <label for="newCountry" class="form-label">Country</label>
-            <select name="newCountry" id="country" class="form-control"></select>
-            <option id="countryChoice" value="<%= story.country%>"></option>
-          </div>
-          <div>
-            <label for="newContinent" class="form-label">Continent</label>
-            <select name="newContinent" id="continent" class="form-control"></select>
-            <option id="continentChoice" value="<%= story.continent%>"></option>
-          </div>
-          <span class="asterix">* Required fields</span>
-          <button type="submit" class="highlight-button" value="Upload">Save changes</button> 
-        </form>
-  </div>
-</section>
-      <!-- /edit the story-->
+<% if(editStory){ %>
+  <!--edit the story-->
+  <!--update the image-->
+  <h2 class="profile-subtitle">Update the image</h2>
+  <div class="edit-image">
 
+    <form class="create-edit-story" action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
+      <div class="mb-3">
+        <label for="imgUpload" class="form-label">Image</label>
+        <input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
+      </div>
+      <button type="submit" class="highlight-button" value="Upload">Change image</button> 
+    </form>
+    <img class="img-fluid" src="<%= story.image%>">
+  </div>
+<!-- /update the image-->
+<h2 class="profile-subtitle">Edit your story</h2>
+<% if(errorMessage){ %>
+  <span class="error-message"><%= errorMessage%></span>
 <% } %>
-<!--/edit story-->
-<!--Static profile (there is a story and no editing)-->
+<form class="create-edit-story" action="/updateStory/<%= story._id %>?_method=PUT " method="POST">
+  <div>
+      <label for="newTitle" class="form-label">Title *</label>
+      <input type="text" class="form-control" id="title" name="newTitle" value="<%= story.title%>">
+  </div>
+  <div class="insert-text">
+    <label for="newTextContent" class="form-label">Story *</label>
+    <textarea oninput="auto_grow(this)" class="form-control edit-textarea" id="textContent" name="newTextContent" wrap ><%= story.textContent%></textarea>
+  </div>
+  <div>
+    <label for="newCountry" class="form-label">Country</label>
+    <select name="newCountry" id="country" class="form-control"></select>
+    <option id="countryChoice" value="<%= story.country%>"></option>
+  </div>
+  <div>
+    <label for="newContinent" class="form-label">Continent</label>
+    <select name="newContinent" id="continent" class="form-control"></select>
+    <option id="continentChoice" value="<%= story.continent%>"></option>
+  </div>
+  <span class="asterix">* Required fields</span>
+  <button type="submit" class="highlight-button" value="Upload">Save changes</button> 
+</form>
+    <!-- /edit the story-->
 
-<% if(!editStory && story){ %>
-  <section class="profile-section">
-    <div class="container">
+    <% } %>
+    <!--/edit story-->
+    <!--Static profile (there is a story and no editing)-->
+    
+    <% if(!editStory && story){ %>
       <h2 class="profile-subtitle">Your story</h2>
       <div class="main-profile-story">
         <h3><%= story.title%></h3>
         <div class="story-details center">
           <!--Date-->
           <span class="date">
-          <%= story.createdAt.getDate()%>.<%= story.createdAt.getMonth()%>.<%= story.createdAt.getFullYear()%>
+          <%= story.createdAt.getDate()%>.<%= story.createdAt.getMonth()+1%>.<%= story.createdAt.getFullYear()%>
           </span>
           <!--/Date-->
           <!--Displaying the region and managing the comma-->
@@ -132,7 +119,7 @@
             <i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"> <%= story.likes%></i>
         </div>
         <p class="story-text"><%= story.textContent%></p>
-        <div class="profile-actions-buttons">
+        <div class="user-actions-buttons">
           <a href="/editStory/<%= story._id%>">
             <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #698ece;"></i>
           </a>
@@ -151,7 +138,6 @@
 
   </div>
 </section>
-   
 
 
 <%- include('partials/footer') -%>
