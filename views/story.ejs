@@ -1,94 +1,99 @@
 <%- include('partials/header') -%>
 <section class="story-page-section">
-  <div class="container">
+  	<div class="container">
 
-    <!--User info-->
-    <!-- <% if(user){%>
-    <div class="username">
-     <p>Hello, <%= user.userName %></p>
-     </div>
-   <% }%> -->
-   <!--/User info-->
+		<!--User info-->
+		<!-- <% if(user){%>
+			<div class="username">
+				<p>Hello, <%= user.userName %></p>
+			</div>
+		<% }%> -->
+		<!--/User info-->
 
-   <!--The story-->
-      <div class="story-page-content">
-          <h1><%= story.title%></h1>
-          <span><%= story.user.userName%>'s story</span>
-          <div class="story-details center">
-            <!--Date-->
-            <span class="date">
-            <%= story.createdAt.getDate()%>.<%= story.createdAt.getMonth()+1%>.<%= story.createdAt.getFullYear()%>
-            </span>
-            <!--/Date-->
-            <!--Displaying the region and managing the comma-->
-            <span class="region-details">
-              <%= story.country%><%if(story.country && story.continent ){ %>,<%}%>
-              <%= story.continent%>
-            </span>
-            <!-- /Displaying the region and managing the comma-->
-          </div>
-          <img class="img-fluid" src="<%= story.image%>" />
+		<!--The story-->
+		<div class="story-page-content">
+			<h1><%= story.title%></h1>
+			<%if( user && story.user._id == user.id){ %>
+				<span>Your story</span>
+			<% } else { %>
+				<span><%= story.user.userName%>'s story</span>
+			<% } %>
+			<div class="story-details center">
+				<!--Date-->
+				<span class="date">
+				<%= story.createdAt.getDate()%>.<%= story.createdAt.getMonth()+1%>.<%= story.createdAt.getFullYear()%>
+				</span>
+				<!--/Date-->
+				<!--Displaying the region and managing the comma-->
+				<span class="region-details">
+				<%= story.country%><%if(story.country && story.continent ){ %>,<%}%>
+				<%= story.continent%>
+				</span>
+				<!-- /Displaying the region and managing the comma-->
+			</div>
+			<img class="img-fluid" src="<%= story.image%>" />
+			<!--User reactions-->
+			<div class="flex-row reaction-display">
+				<!--Num of likes and readings-->
+				<i class="fa-solid fa-book-open fa-lg" style="color: #857a7a;"> <%= story.readBy%></i>
+				<i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"> <%= story.likes%></i>
+				<!-- /Num of likes and readings-->
+			</div>
+			<!-- /User reactions-->
 
-          <!--User reactions-->
-          <div class="flex-row reaction-display">
-              <!--Num of likes and readings-->
-              <i class="fa-solid fa-book-open fa-lg" style="color: #857a7a;"> <%= story.readBy%></i>
-              <i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"> <%= story.likes%></i>
-              <!-- /Num of likes and readings-->
-           </div>
-          <!-- /User reactions-->
+			<!--story's main text-->
+			<div>
+				<p  class="story-text"><%= story.textContent %></p>
+			</div>
+			<!-- /story's main text-->
 
-          <div>
-            <p  class="story-text"><%= story.textContent %></p>
-          </div>
+			<!-- User self-story actions-->
+			<%if( user && story.user._id == user.id){ %>
+				<div class="user-actions-buttons">
+					<!--Edit story--> 
+					<a href="/editStory/<%= story._id%>">
+						<i class="fa-solid fa-pen-to-square fa-2xl" style="color: #698ece;"></i>
+					</a>
+					<!-- /Edit story--> 
+					<!--Delete story-->         
+					<form
+						action="/story/deleteStory/<%= story._id %>?_method=DELETE"
+						method="POST"
+						class="col-1"
+					>
+							<button class="fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
+					</form>
+					<!--/Delete story-->
+				</div>
+			<%}%>
+			<!-- /User self-story actions-->
 
-          <!-- User self-story actions-->
-          <div class="user-actions-buttons">
-              <!--Edit story--> 
-              <a href="/editStory/<%= story._id%>">
-                <i class="fa-solid fa-pen-to-square fa-2xl" style="color: #698ece;"></i>
-              </a>
-              <!-- /Edit story--> 
-              <!--Delete story-->         
-              <%if( user && story.user._id == user.id){ %>
-              <form
-                action="/story/deleteStory/<%= story._id %>?_method=DELETE"
-                method="POST"
-                class="col-1"
-              >
-                <button class="fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
-              </form>
-              <%}%>
-              <!--/Delete story-->
-          </div>
-          <!-- /User self-story actions-->
-
-          <!-- User other-story actions-->
-          <div class="flex-row interact-buttons">
-            <!--Like story-->
-            <%if(user && story.user._id != user.id){ %>
-             <form
-               action="/story/likeStory/<%= story._id %>?_method=PUT"
-               method="POST"
-             >
-                <button class="fa-solid fa-thumbs-up fa-2xl" style="color: #2971ce;" type="submit"></button>
-             </form>
-             <%}%>
-             <!-- /Like story-->
-             <!--Favorite story-->
-             <%if(user && story.user._id != user.id){ %>
-               <form
-                 action="/story/favoriteStory/<%= story._id %>"
-                 method="POST"
-               >
-                  <button class="fa-solid fa-star fa-2xl" style="color: #ff4b4b;" type="submit"></button>
-               </form>
-               <%}%>
-             <!-- /Favorite story-->
-            </div>
-             <!-- /User other-story actions-->
-      </div>
-   <!-- /The story-->
+			<!-- User other-story actions-->
+			<div class="flex-row interact-buttons">
+				<!--Like story-->
+				<%if(user && story.user._id != user.id){ %>
+				<form
+				action="/story/likeStory/<%= story._id %>?_method=PUT"
+				method="POST"
+				>
+					<button class="fa-solid fa-thumbs-up fa-2xl" style="color: #2971ce;" type="submit"></button>
+				</form>
+				<%}%>
+				<!-- /Like story-->
+				<!--Favorite story-->
+				<%if(user && story.user._id != user.id){ %>
+				<form
+					action="/story/favoriteStory/<%= story._id %>"
+					method="POST"
+				>
+					<button class="fa-solid fa-star fa-2xl" style="color: #ff4b4b;" type="submit"></button>
+				</form>
+				<%}%>
+				<!-- /Favorite story-->
+				</div>
+				<!-- /User other-story actions-->
+		</div>
+	<!-- /The story-->
   </div>
 </section>
 

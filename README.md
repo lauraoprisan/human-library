@@ -1,5 +1,6 @@
-Working on:
-- updating the frontend (story page, favorite page, login page)
+Worked on:
+- updating the frontend (login page/signup page)
+- adaptability (it is mainly responsive now)
 
 
 Problems:

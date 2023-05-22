@@ -1,14 +1,14 @@
 <%- include('partials/header') -%>
- <!--User info-->
- <% if(user){%>
-  <div class="container username">
-   <p>Hello, <%= user.userName %></p>
- </div>
- <% }%>
- <!--/User info-->
+<% if(user){%>
+	<!-- <div class="container username">
+	 <p>Hello, <%= user.userName %></p>
+   </div> -->
+<% }%>
    <section class="title-section">
      <h1>Your favorite stories</h1>
    </section>
+    <!--User info-->
+   <!--/User info-->
  <!--Library content-->
    <section class="container library-content">
 
@@ -16,7 +16,7 @@
      <section class="container stories-section fav-section">
        <ul class="stories-snippets">
          <% for(var i=0; i<stories.length; i++) {%>
-           <li class="single-story">
+           <li class="single-story single-favorite-story">
              <!-- <span><%= stories[i].user.userName%></span> -->
              <a href="/story/<%= stories[i]._id%>">
                  <div class="story-details">

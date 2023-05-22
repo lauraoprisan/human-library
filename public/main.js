@@ -87,14 +87,14 @@ function showContinents(){
 }
 
 //update image
-const updateImgBtn = document.querySelector("#update-image-btn")
-const editImageForm = document.querySelector("#edit-image-form")
+// const updateImgBtn = document.querySelector("#update-image-btn")
+// const editImageForm = document.querySelector("#edit-image-form")
 
-updateImgBtn.addEventListener("click", showEditImage)
-function showEditImage(){
-    editImageForm.classList.remove("hidden")
-    console.log("hei")
-}
+// updateImgBtn.addEventListener("click", showEditImage)
+// function showEditImage(){
+//     editImageForm.classList.remove("hidden")
+//     console.log("hei")
+// }
 
 
 //responsive textarea field
@@ -110,3 +110,31 @@ function auto_grow(element) {
 //     const textarea = document.querySelector('.edit-textarea');
 //     auto_grow(textarea)
 //   });
+
+
+// Mobile filter-sort buttons (show filter/sort section)
+const showFilter = document.querySelector("#show-filter")
+const showSort = document.querySelector("#show-sort")
+const filterSection = document.querySelector("#filter-section")
+const sortSection = document.querySelector("#sort-section")
+const removeButton = document.querySelector(".remove-options-button")
+
+const hideFilterSort = document.querySelectorAll(".hide-filter-sort")
+
+showFilter.addEventListener("click", ()=>{
+    filterSection.classList.add("show")
+    removeButton.classList.add("show")
+    sortSection.classList.remove("show")
+})
+
+showSort.addEventListener("click", ()=>{
+    filterSection.classList.remove("show")
+    removeButton.classList.add("show")
+    sortSection.classList.add("show")
+})
+
+hideFilterSort.forEach(item => item.addEventListener("click", ()=>{
+    filterSection.classList.remove("show")
+    removeButton.classList.remove("show")
+    sortSection.classList.remove("show")
+}))

@@ -1,9 +1,9 @@
 <%- include('partials/header') -%>
  <!--User info-->
 <% if(user){%>
- <div class="container username">
+ <!-- <div class="container username">
   <p>Hello, <%= user.userName %></p>
-</div>
+</div> -->
 <% }%>
 <!--/User info-->
   <section class="title-section">
@@ -12,55 +12,73 @@
 <!--Library content-->
   <section class="container library-content">
 <!--Filter/sort-->
-    <section class="filter">
+
+    <section class="filter-sort">
+		<div class="mobile-filter-sort-buttons">
+			<button id="show-filter" class="highlight-button">Filter</button>
+			<button id="show-sort" class="highlight-button">Sort</button>
+		</div>
 <!--Filter-->
-        <h3 class="filter-subtitle">Filter</h3>
-        <form action="/library/filter"
-            method="GET">
-          <div class="flex-col">
-            <span id="filter-country" class="chosen-btn">Country</span>
-            <select id="countries-options" name="country" class="form-control">
-              <% for (let i = -1; i < countries.length; i++) { %>
-                <% if(i == -1){ %>
-                <option value="">No selection</option>
-                <% } else {  %>
-                <option value="<%= countries[i] %>"><%= countries[i] %></option>
-              <% }} %>
-            </select>
-          </div>
-          <div class="flex-col">
-            <span id="filter-continent">Continent</span>
-            <select id="continents-options" name="continent" class="form-control hidden">
-              <% for (let i = -1; i < continents.length; i++) { %>
-                <% if(i == -1){ %>
-                <option value="">No selection</option>
-                <% } else {  %>
-                <option value="<%= continents[i] %>"><%= continents[i] %></option>
-              <% }} %>
-            </select>
-          </div>
-          <button class="highlight-button filter-btn" type="submit" >Filter</button>
-        </form>
+		<div id="filter-section" class="filter">
+			<div class="flex-row filter-sort-mobile-title-cancel">
+				<h3 class="filter-subtitle">Filter</h3>
+				<i class="fa-solid fa-xmark fa-2xl hide-filter-sort" style="color: #857a7a;"></i>
+			</div>
+			<form action="/library/filter"
+				method="GET">
+			<div class="flex-col">
+				<span id="filter-country" class="chosen-btn">Country</span>
+				<select id="countries-options" name="country" class="form-control">
+				<% for (let i = -1; i < countries.length; i++) { %>
+					<% if(i == -1){ %>
+					<option value="">No selection</option>
+					<% } else {  %>
+					<option value="<%= countries[i] %>"><%= countries[i] %></option>
+				<% }} %>
+				</select>
+			</div>
+			<div class="flex-col">
+				<span id="filter-continent">Continent</span>
+				<select id="continents-options" name="continent" class="form-control hidden">
+				<% for (let i = -1; i < continents.length; i++) { %>
+					<% if(i == -1){ %>
+					<option value="">No selection</option>
+					<% } else {  %>
+					<option value="<%= continents[i] %>"><%= continents[i] %></option>
+				<% }} %>
+				</select>
+			</div>
+			<button class="highlight-button filter-btn" type="submit" >Filter</button>
+			</form>
+		</div>  
 <!--/Filter-->
 <!--Sort-->
-        <h3 class="sort-subtitle">Sort by</h3>
-        <form action="/library/sortByMostLiked" 
-            method="GET">
-          <button class="sort-btn" type="submit" value="mostLiked" name="likes">Most liked</button>
-        </form>
-        <form  action="/library/sortByPopularity" 
-            method="GET">
-          <button class="sort-btn" type="submit"  value="popularityHigh" name="popularity">Popularity</button>
-        </form>
-        <form class="sort-btn" action="/library/undiscoveredTreasures" 
-            method="GET">
-          <button class="sort-btn" type="submit"  value="popularityLow" name="popularity">Undiscovered Treasures</button>
-        </form>
+		<div id="sort-section" class="sort-div">
+			<div class="flex-row filter-sort-mobile-title-cancel">
+				<h3 class="sort-subtitle">Sort by</h3>
+				<i  class="fa-solid fa-xmark fa-2xl hide-filter-sort" style="color: #857a7a;"></i>
+			</div>
+			
+			<form action="/library/sortByMostLiked" 
+				method="GET">
+				<button class="sort-btn" type="submit" value="mostLiked" name="likes">Most liked</button>
+			</form>
+			<form  action="/library/sortByPopularity" 
+				method="GET">
+				<button class="sort-btn" type="submit"  value="popularityHigh" name="popularity">Popularity</button>
+			</form>
+			<form action="/library/undiscoveredTreasures" 
+				method="GET">
+				<button class="sort-btn" type="submit"  value="popularityLow" name="popularity">Undiscovered Treasures</button>
+			</form>
+		</div>
 <!--/Sort-->
 <!--Remove all filters and sorts-->
-        <a href="/library">
-          <button class="remove-all-btn" type="submit" >Remove filter / sort</button>
-        </a>
+		<div class="remove-options-button">
+			<a href="/library">
+				<button class="remove-all-btn" type="submit" >Remove filter / sort</button>
+			</a>
+		</div>
 <!--/Remove all filters and sorts-->
     </section>
 <!-- /Filter/sort-->
