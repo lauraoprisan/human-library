@@ -7,6 +7,10 @@
     line-height: 1.5;
 }
 
+body{
+    position: relative;
+}
+
 .container{
     display:flex;
     flex-direction:column;
@@ -16,6 +20,7 @@
     max-width: none;
 
 }
+
 
 ul{
     padding:0;
@@ -91,6 +96,10 @@ span, p, button, label, option{
 .show{
     display:block;
 }
+
+button{
+    border:0;
+}
 /* /GENERAL STYLING */
 
 /* HEADER */
@@ -106,11 +115,11 @@ header .container{
    
 }
 
-header nav{
+/* header nav{
     width:70%;
-}
+} */
 
-header .container ul{
+header ul{
     display:flex;
     justify-content: flex-end;
     align-items: center; 
@@ -126,6 +135,51 @@ header li a{
     font-size: 1.2rem;
 }
 
+/*hamburger button*/
+.hamburger-menu{
+    display:none;
+    height:50px;
+    width:50px;
+    position:relative;
+    cursor:pointer;
+    padding:1rem;
+    z-index: 3;
+}
+
+.bar{
+    width:70%;
+    height:4px;
+    background-color: #545454;
+    border-radius:25px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    transition: transform .6s, opacity .8s, top .6s;
+}
+
+.bar-top{
+    top:25%;
+}
+
+.bar-bottom{
+    top:75%;
+}
+
+.hamburger-menu.active .bar-top{
+    transform: translate(-50%,-50%) rotate(-315deg);
+    top:50%;
+}
+
+.hamburger-menu.active .bar-mid{
+    opacity:0;
+}
+
+.hamburger-menu.active .bar-bottom{
+    transform: translate(-50%,-50%) rotate(-225deg);
+    top:50%;
+}
+/* /hamburger button*/
 
 /* /HEADER */
 
@@ -812,6 +866,10 @@ textarea {
     }
 
     /*home*/
+    #home-title{
+        font-size:2.5rem;
+    }
+    
     .main-info{
         margin-top:20px;
     }
@@ -840,9 +898,43 @@ textarea {
         font-size: 1.7rem;
     }
 
-    
+    /*header*/
 
- 
+    .hamburger-menu{
+        display:block;
+    }
+
+    .mobile-menu{
+        display:none;
+        background-color:rgb(205, 205, 205);
+        position:fixed;  
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        height:100vh;
+        z-index:2;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        pointer-events: all;
+    }
+
+    .mobile-menu.active{
+        display:flex;
+    }
+
+    .mobile-menu a{
+        font-size:2rem;
+    }
+    .mobile-menu a:hover{
+       color: rgb(232, 145, 31);
+    }
+    
+    .mobile-menu li{
+        padding:20px 0;
+        margin:0;
+    }
 
 }
 
@@ -855,6 +947,12 @@ textarea {
     .main-info{
         margin-top:0px;
     }
+
+    #home-title{
+        font-size:2rem;
+        font-weight: 700;
+    }
+    
 
     /*profile*/
     .profile-section  .user-actions-buttons > *{
@@ -872,32 +970,18 @@ textarea {
 
 }
 
-@media (max-width:371px){
-    /*home*/
-    #home-title{
-        font-size: 2.5rem ;
-        font-weight: 700;
-    }
-
-}
-
-/*minimum phone width: 360px */
-/* @media (max-width:335px){
-    #home-title{
-        font-size: 2.2rem ;
-        font-weight: 700;
-    }
-
-} */
 /* /Media queries*/
 
 
 
 
-
+/*general part 2*/
 .show{
     display:block;
 }
+
+/* /general part 2*/
+
 
 
 

@@ -70,31 +70,39 @@ const filterContinent = document.querySelector("#filter-continent")
 const countryOptions = document.querySelector("#countries-options")
 const continentOptions = document.querySelector("#continents-options")
 
-filterCountry.addEventListener("click", showCountries)
-function showCountries(){
-    filterCountry.classList.add("chosen-btn")
-    filterContinent.classList.remove("chosen-btn")
-    countryOptions.classList.remove("hidden")
-    continentOptions.classList.add("hidden")
+if(filterCountry){
+    filterCountry.addEventListener("click", showCountries)
+    function showCountries(){
+        filterCountry.classList.add("chosen-btn")
+        filterContinent.classList.remove("chosen-btn")
+        countryOptions.classList.remove("hidden")
+        continentOptions.classList.add("hidden")
+    }
 }
 
-filterContinent.addEventListener("click", showContinents)
-function showContinents(){
-    filterCountry.classList.remove("chosen-btn")
-    filterContinent.classList.add("chosen-btn")
-    countryOptions.classList.add("hidden")
-    continentOptions.classList.remove("hidden")
+if(filterContinent){
+    filterContinent.addEventListener("click", showContinents)
+    function showContinents(){
+        filterCountry.classList.remove("chosen-btn")
+        filterContinent.classList.add("chosen-btn")
+        countryOptions.classList.add("hidden")
+        continentOptions.classList.remove("hidden")
+    }
 }
+
 
 //update image
-// const updateImgBtn = document.querySelector("#update-image-btn")
-// const editImageForm = document.querySelector("#edit-image-form")
+const updateImgBtn = document.querySelector("#update-image-btn")
+const editImageForm = document.querySelector("#edit-image-form")
 
-// updateImgBtn.addEventListener("click", showEditImage)
-// function showEditImage(){
-//     editImageForm.classList.remove("hidden")
-//     console.log("hei")
-// }
+if(updateImgBtn){
+    updateImgBtn.addEventListener("click", showEditImage)
+    function showEditImage(){
+        editImageForm.classList.remove("hidden")
+        console.log("hei")
+    }
+}
+
 
 
 //responsive textarea field
@@ -121,20 +129,45 @@ const removeButton = document.querySelector(".remove-options-button")
 
 const hideFilterSort = document.querySelectorAll(".hide-filter-sort")
 
-showFilter.addEventListener("click", ()=>{
-    filterSection.classList.add("show")
-    removeButton.classList.add("show")
-    sortSection.classList.remove("show")
-})
+if(showFilter){
+    showFilter.addEventListener("click", ()=>{
+        filterSection.classList.add("show")
+        removeButton.classList.add("show")
+        sortSection.classList.remove("show")
+    })
+}
 
-showSort.addEventListener("click", ()=>{
-    filterSection.classList.remove("show")
-    removeButton.classList.add("show")
-    sortSection.classList.add("show")
-})
+if(showSort){
+    showSort.addEventListener("click", ()=>{
+        filterSection.classList.remove("show")
+        removeButton.classList.add("show")
+        sortSection.classList.add("show")
+    })
+}
+
 
 hideFilterSort.forEach(item => item.addEventListener("click", ()=>{
     filterSection.classList.remove("show")
     removeButton.classList.remove("show")
     sortSection.classList.remove("show")
 }))
+
+// JavaScript to handle mobile menu functionality
+
+// var hamburgerBtn = document.getElementById('hamburger');
+// var mobileMenu = document.querySelector('.mobileMenu');
+
+// hamburgerBtn.addEventListener('click', function() {
+// 	mobileMenu.classList.toggle('show-none');
+// });
+
+const hamburgerMenu = document.querySelector(".hamburger-menu")
+const mobileMenu = document.querySelector(".mobile-menu")
+
+if(hamburgerMenu){
+    hamburgerMenu.addEventListener("click", ()=>{
+        hamburgerMenu.classList.toggle("active")
+        mobileMenu.classList.toggle("active")
+    })
+    
+}

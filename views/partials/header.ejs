@@ -36,14 +36,16 @@
 				<i class="fa-solid fa-book-open-reader fa-2xl" style="color: #545454;"></i>
 			</a>
 			<nav>
-				<!--Mobile menu-->
-				<button class="hamburger" id="hamburger">
-					<div class="hamburger-btn"></div>
-				</button>
-				<!-- /Mobile menu-->
-				<ul class="mobileMenu show-none">
+				<!--hamburger button-->
+				<div class="hamburger-menu">
+					<div class="bar bar-top"></div>
+					<div class="bar bar-mid"></div>
+					<div class="bar bar-bottom"></div>
+				</div>
+				<!-- /hamburger button-->
+				<ul class="mobile-menu">
 					<% if(user){%>
-					<li><a href="/login">Profile</a></li>
+					<li><a  href="/login">Profile</a></li>
 					<li><a href="/favorites">Favorites</a></li>
 					<% }%>
 					<li><a href="/library">Stories</a></li>
