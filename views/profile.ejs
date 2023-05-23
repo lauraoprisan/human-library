@@ -48,18 +48,21 @@
 				<button type="submit" class="highlight-button" value="Upload">Post</button>
 			</form>
 		<% } %>
-		<!--Add story / if there is no story-->
+		<!-- /Add story / if there is no story-->
 
 		<!--edit story / if there is a story-->
 		<% if(editStory){ %>
+
 			<!--update the image-->
-			
 			<h2 class="profile-subtitle">Update the image</h2>
+			<% if(imgError){ %>
+				<span class="img-error-text"><%= imgError%></span>
+			<% } %>
 			<div class="edit-image">
 				<form class="create-edit-story" action="/updateImage/<%= story._id %>?_method=PUT " enctype="multipart/form-data" method="POST" class="" id="edit-image-form">
 					<div class="mb-3">
 						<label for="imgUpload" class="form-label">Image</label>
-						<input type="file" class="form-control" id="imageUpload" name="file" value="<%= story.image%>">
+						<input type="file" class="form-control" id="imageUpload" name="file">
 					</div>
 					<button type="submit" class="highlight-button" value="Upload">Change image</button> 
 				</form>
@@ -70,9 +73,6 @@
 			<!-- /update the image-->
 			<!--edit the story text-->
 			<h2 class="profile-subtitle">Edit your story</h2>
-			<% if(errorMessage){ %>
-				<span class="error-message"><%= errorMessage%></span>
-			<% } %>
 			<form class="create-edit-story" action="/updateStory/<%= story._id %>?_method=PUT " method="POST">
 				<div>
 					<label for="newTitle" class="form-label">Title *</label>
@@ -93,6 +93,9 @@
 					<option id="continentChoice" value="<%= story.continent%>"></option>
 				</div>
 				<span class="asterix">* Required fields</span>
+				<% if(errorMessage){ %>
+					<span class="error-message"><%= errorMessage%></span>
+				<% } %>
 				<button type="submit" class="highlight-button" value="Upload">Save changes</button> 
 			</form>
 			<!-- /edit the story text-->

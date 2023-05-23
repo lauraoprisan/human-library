@@ -72,22 +72,41 @@
 			<div class="flex-row interact-buttons">
 				<!--Like story-->
 				<%if(user && story.user._id != user.id){ %>
-				<form
-				action="/story/likeStory/<%= story._id %>?_method=PUT"
-				method="POST"
-				>
-					<button class="fa-solid fa-thumbs-up fa-2xl" style="color: #2971ce;" type="submit"></button>
-				</form>
+					<%if(isLiked){ %>
+						<form
+						action="/story/unlikeStory/<%= story._id %>?_method=PUT"
+						method="POST"
+						>
+							<button class="fa-solid fa-thumbs-up fa-2xl" style="color: #513cc5;" type="submit"></button>
+						</form>
+					<%}else { %>
+						<form
+						action="/story/likeStory/<%= story._id %>?_method=PUT"
+						method="POST"
+						>
+							<button class="fa-regular fa-thumbs-up fa-2xl" style="color: #857a7a;" type="submit"></button>
+						</form>
+					<%}%>
 				<%}%>
 				<!-- /Like story-->
 				<!--Favorite story-->
 				<%if(user && story.user._id != user.id){ %>
-				<form
-					action="/story/favoriteStory/<%= story._id %>"
-					method="POST"
-				>
-					<button class="fa-solid fa-star fa-2xl" style="color: #ff4b4b;" type="submit"></button>
-				</form>
+					<%if(isFav){ %>
+						<form
+						action="/story/unfavoriteStory/<%= story._id %>?_method=DELETE %>"
+						method="POST"
+						>
+							<button class="fa-solid fa-star fa-2xl" style="color: rgb(234, 155, 52);" type="submit"></button>
+						</form>
+					<%}else { %>
+						<form
+						action="/story/favoriteStory/<%= story._id %>"
+						method="POST"
+						>
+							<button class="fa-regular fa-star fa-2xl" style="color: #857a7a;" type="submit"></button>
+						</form>
+					<%}%>
+				
 				<%}%>
 				<!-- /Favorite story-->
 				</div>

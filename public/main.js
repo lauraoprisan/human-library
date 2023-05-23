@@ -1,6 +1,7 @@
 const addStory = document.querySelector("#add-story")
 const submitError = document.querySelector(".error-message")
-if (window.location.pathname.includes('profile') && addStory || window.location.pathname.includes('editStory') || submitError){
+const imgError = document.querySelector(".img-error-text")
+if (window.location.pathname.includes('profile') && addStory || window.location.pathname.includes('editStory') || submitError || imgError ){
     //select the country
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectCountry =document.querySelector("#country")

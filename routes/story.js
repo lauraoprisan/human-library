@@ -9,7 +9,7 @@ const { ensureAuth } = require("../middleware/auth");
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
 router.get("/:id", storyController.getStory);
-router.put("/:id", ensureAuth, storyController.viewedStory);
+// router.put("/:id", ensureAuth, storyController.viewedStory);
 
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createStory", upload.single("file"), storyController.createStory);
@@ -18,6 +18,7 @@ router.post("/createStory", upload.single("file"), storyController.createStory);
 router.put("/likeStory/:id", storyController.likeStory);
 router.put("/unlikeStory/:id", storyController.unlikeStory);
 router.post("/favoriteStory/:id", storyController.favoriteStory);
+router.delete("/unfavoriteStory/:id", storyController.unfavoriteStory);
 
 //Enables user to delete post. In controller, uses POST model to delete post from mongo.db collection
 router.delete("/deleteStory/:id", storyController.deleteStory);

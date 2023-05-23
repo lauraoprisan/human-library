@@ -14,6 +14,7 @@
 
  <!--Story snippet-->
      <section class="container stories-section fav-section">
+      <% if(stories.length != 0){%>
        <ul class="stories-snippets">
          <% for(var i=0; i<stories.length; i++) {%>
            <li class="single-story single-favorite-story">
@@ -55,6 +56,10 @@
            </li>
          <% } %>
          </ul>
+         <% } else{%>
+          <p id="none-saved-info">You have no stories saved</p>
+          <i class="none-saved fa-regular fa-star fa-2xl" style="color: #b7b2b2;"></i>
+          <% }%>
      </section>
  <!-- /Story snippet-->
    </section>

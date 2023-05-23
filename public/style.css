@@ -100,6 +100,19 @@ span, p, button, label, option{
 button{
     border:0;
 }
+
+.error-message, .img-error-text{
+    margin-top:20px;
+    color:red;
+}
+
+#none-saved-info{
+    font-size:2rem;
+    margin-bottom:30vh;
+}
+.none-saved{
+    font-size:15rem;
+}
 /* /GENERAL STYLING */
 
 /* HEADER */
@@ -285,6 +298,10 @@ input{
     align-items: flex-start;
 }
 
+.fav-section{
+    min-height: 90vh;
+    justify-content: flex-start;
+}
 .subtitle-and-edit{
     position:relative;
 }
@@ -388,6 +405,8 @@ input{
     margin-top:20px;
 }
 
+
+
 .reaction-display span, .reaction-display i{
     margin-right:15px;
 }
@@ -428,6 +447,9 @@ select option{
     margin:10px 0 20px;
 }
 
+.sort-btn:hover{
+    color:rgb(234, 155, 52);
+}
 
 /* /Library  + favorite page*/
 
@@ -538,8 +560,10 @@ textarea {
 }
 .story-text{
     margin-top:50px;
+    margin-bottom:100px;
     white-space: pre-wrap;
 }
+
 
 .main-profile-story i {
     margin-right:20px;
