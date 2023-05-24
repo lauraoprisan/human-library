@@ -112,12 +112,7 @@
 					<a href="/editStory/<%= story._id%>">
 						<i class="fa-solid fa-pen-to-square fa-2xl" style="color: #698ece;"></i>
 					</a>
-					<form
-					action="/story/deleteStory/<%= story._id %>?_method=DELETE"
-					method="POST"
-					>
-						<button class="fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
-					</form>
+					<button class="show-delete-popup fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
 				</div>
 			</div>
 			
@@ -143,11 +138,30 @@
 				</div>
 				<p class="story-text"><%= story.textContent%></p>
 			</div>
+			
 		<% } %> 
 	<!-- /Static profile (condition: there is a story and no editing)-->
 
 		</div>
+
 </section>
+<% if(!editStory && story){ %>
+<section class="popup-container" id="delete-popup">
+	<div class="popup">
+		<p>Are you sure you want to delete the story?</p>
+		<div class="flex-row">
+			<button class=" delete-popup-button cancel-button">No</button>
+			<form
+			action="/story/deleteStory/<%= story._id %>?_method=DELETE"
+			method="POST"
+			>
+				<button class="delete-popup-button highlight-button">Yes</button>
+			</form>
+			
+		</div>
+	</div>
+</section>
+<% }%>
 
 
 <%- include('partials/footer') -%>

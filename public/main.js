@@ -155,13 +155,6 @@ hideFilterSort.forEach(item => item.addEventListener("click", ()=>{
 
 // JavaScript to handle mobile menu functionality
 
-// var hamburgerBtn = document.getElementById('hamburger');
-// var mobileMenu = document.querySelector('.mobileMenu');
-
-// hamburgerBtn.addEventListener('click', function() {
-// 	mobileMenu.classList.toggle('show-none');
-// });
-
 const hamburgerMenu = document.querySelector(".hamburger-menu")
 const mobileMenu = document.querySelector(".mobile-menu")
 
@@ -172,3 +165,18 @@ if(hamburgerMenu){
     })
     
 }
+
+// Delete popup
+
+const showDeletePopup = document.querySelector(".show-delete-popup ")
+const closeDeletePopup = document.querySelectorAll(".delete-popup-button")
+const deletePopup = document.querySelector("#delete-popup")
+
+showDeletePopup.addEventListener("click", ()=>{
+    deletePopup.classList.toggle("active")
+})
+
+closeDeletePopup.forEach(btn => btn.addEventListener("click", ()=>{
+    deletePopup.classList.toggle("active")
+}))
+
