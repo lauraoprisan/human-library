@@ -1,39 +1,77 @@
 const addStory = document.querySelector("#add-story")
 const submitError = document.querySelector(".error-message")
 const imgError = document.querySelector(".img-error-text")
+
+
 if (window.location.pathname.includes('profile') && addStory || window.location.pathname.includes('editStory') || submitError || imgError ){
+    // let automaticContinent;
+    // let chosenCountry 
+
     //select the country
-    window.addEventListener("DOMContentLoaded", ()=>{
-        const selectCountry =document.querySelector("#country")
-        const countryValue = document.querySelector("#countryChoice").value
+    window.addEventListener("DOMContentLoaded", () => {
+        const selectCountry = document.querySelector("#country");
+        const countryValue = document.querySelector("#countryChoice").value;
+     
+        // let automaticContinent;
+      
+        fetch("https://restcountries.com/v3.1/all")
+          .then(res => res.json())
+          .then(data => {
+            let output = `<option value="">No selection</option>`;
+            const sortedData = data.sort((a, b) => (a.name.common > b.name.common ? 1 : -1));
+            sortedData.forEach(country => {
+              if (countryValue && countryValue == country.name.common) {
+                // Select the option that has the countryValue and add a selected attribute
+                output += `<option class="possible-country" value="${country.name.common}" selected>${country.name.common}</option>`;
+                // continentValue =  country.continents[0]
+                selectContinent = country.continents[0]
+                console.log("selected continent: " +selectContinent)
+                // Store the continent of the country somewhere
+                // automaticContinent = country.continents[0];
+      
+                // let autCont = () => fetch('/story/createStory', {
+                //   method: 'POST',
+                //   headers: {
+                //     'Content-Type': 'application/json'
+                //   },
+                //   body: JSON.stringify({
+                //     'continentFromJs': automaticContinent
+                //   })
+                // })
+                //   .then(response => response.json())
+                //   .then(data => {
+                //     console.log(data);
+                //   })
+                //   .catch(error => {
+                //     console.error('Error:', error);
+                //   });
 
-        fetch("https://restcountries.com/v3.1/all").then(res => {
-            return res.json();
-        }).then(data =>{
-            let output =   `<option value="">No selection</option>`
-            const sorteData = data.sort((a,b)=>a.name.common >b.name.common ? 1 : -1)
-            sorteData.forEach((country) => {
-          
-                    if(countryValue && countryValue == country.name.common){
-                        //select the option that has the countryValue and add a selected attribute
-                        output += `<option class="possible-country" value="${country.name.common}" selected>${country.name.common}</option>`
-                    }else{
-                        output += `<option class="possible-country" value="${country.name.common}">${country.name.common}</option>`
-                    }
-                
-                //after i select a country/continent I have to get the option chosen and set the option's value to that
-                //if option was clicked, set the option's value to that
-                
-                selectCountry.innerHTML = output
-            })
-           
-        }).catch(err =>{
-            console.log(err)
-        })
-    }),
-
+                //   autCont()
+              } else {
+                output += `<option class="possible-country" value="${country.name.common}">${country.name.common}</option>`;
+              }
+            });
+      
+            // Update the select element with the generated options
+            selectCountry.innerHTML = output;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
   
     //select the continent
+
+    // const chosenCountryValue = document.querySelector("#countryChoice").value;
+    // const selectContinent =document.querySelector("#continent")
+    // const continentValue = document.querySelector("#continentChoice").value
+    // let output = `<option value="">No selection</option>`
+
+    // chosenCountryValue.addEventListener('onchange', ()=>{
+    //     continentValue = chosenCountryValue
+    // })
+
+
     window.addEventListener("DOMContentLoaded", ()=>{
         const selectContinent =document.querySelector("#continent")
         const continentValue = document.querySelector("#continentChoice").value
@@ -46,6 +84,14 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
             let continentsArr = data.map(obj => obj.continents).flat();
             const uniqueContinents = [...new Set(continentsArr)]
             const sortedContinents = uniqueContinents.sort((a,b)=>a >b ? 1 : -1)
+
+            // let automaticContinent;
+            // data.forEach(country => {
+            //     if(country.name.common == chosenCountry){
+            //         automaticContinent = country.continents[0]
+            //     }
+            // })
+            
 
             sortedContinents.forEach(continent => {
                 if(continentValue == continent){
@@ -63,8 +109,6 @@ if (window.location.pathname.includes('profile') && addStory || window.location.
     })
 }
 
-// const chosenCountry = querySelectorAll(".possible-country")
-// chosenCountry.addEventListener("click", setValue)
 
 const filterCountry = document.querySelector("#filter-country")
 const filterContinent = document.querySelector("#filter-continent")
@@ -172,11 +216,121 @@ const showDeletePopup = document.querySelector(".show-delete-popup ")
 const closeDeletePopup = document.querySelectorAll(".delete-popup-button")
 const deletePopup = document.querySelector("#delete-popup")
 
-showDeletePopup.addEventListener("click", ()=>{
-    deletePopup.classList.toggle("active")
+if(showDeletePopup){
+    showDeletePopup.addEventListener("click", ()=>{
+        deletePopup.classList.toggle("active")
+    })
+}
+
+if(closeDeletePopup){
+    closeDeletePopup.forEach(btn => btn.addEventListener("click", ()=>{
+        deletePopup.classList.toggle("active")
+    }))
+    
+}
+
+// const test = document.querySelector(".test")
+
+// test.addEventListener("click", sendData)
+
+// async function sendData(){
+//     fetch('/story/createStory', {
+//         method: 'POST',
+//         headers: {
+//         'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//         'testData': "teeeeest"
+//         })
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//         console.log(data);
+//         })
+//         .catch(error => {
+//         console.error('Error:', error);
+//         });
+// }
+
+const viewedStoryTrigger = document.querySelectorAll(".viewed")
+Array.from(viewedStoryTrigger).forEach((el)=>{
+    el.addEventListener('click', viewedStory)
 })
 
-closeDeletePopup.forEach(btn => btn.addEventListener("click", ()=>{
-    deletePopup.classList.toggle("active")
-}))
+// async function viewedStory(){
+//     const id = viewedStoryTrigger.dataset.id
+//     console.log("from viewed js")
+//     try{
+//         const response = await fetch('story/viewedStory', {
+//             method: 'put',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'idFromJs': id
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
 
+// Make the PUT request to mark the post as viewed
+function viewedStory(){
+    const id = viewedStoryTrigger.dataset.id
+    fetch(`story/viewedStory`, {
+        method: 'PUT',
+        body: JSON.stringify({
+                            'idFromJs': id
+                        })
+        
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response data, e.g., display a success message
+          console.log('Post marked as viewed:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+}
+
+//show comments options
+
+// const showCommentOptions = document.querySelectorAll(".show-comment-options")
+
+// if (showCommentOptions) {
+//     showCommentOptions.forEach((showOption) => {
+//       showOption.addEventListener('click', () => {
+//         const parentComment = showOption.closest('.single-comment');
+//         const commentOptions = parentComment.querySelector('.comment-options');
+//         commentOptions.style.display = "block";
+//       });
+//     });
+
+    
+//   }
+
+const showCommentOptions = document.querySelectorAll(".show-comment-options");
+
+if (showCommentOptions) {
+  showCommentOptions.forEach((showOption) => {
+    showOption.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent the click event from bubbling up
+      const parentComment = showOption.closest('.single-comment');
+      const commentOptions = parentComment.querySelector('.comment-options');
+      commentOptions.style.display = "block";
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    showCommentOptions.forEach((showOption) => {
+      const parentComment = showOption.closest('.single-comment');
+      const commentOptions = parentComment.querySelector('.comment-options');
+      if (!commentOptions.contains(event.target)) {
+        commentOptions.style.display = "none";
+      }
+    });
+  });
+}

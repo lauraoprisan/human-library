@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 <section class="story-page-section">
-  	<div class="container">
+  	<div class="container ">
 
 		<!--User info-->
 		<!-- <% if(user){%>
@@ -111,6 +111,34 @@
 				<!-- /Favorite story-->
 				</div>
 				<!-- /User other-story actions-->
+				<!--comments section-->
+				<%if(user){ %>
+				<form 
+					action="/story/writeComment/<%= story._id %>"
+					method="POST"
+					class="write-comment-form">
+					<textarea required oninput="auto_grow(this)" name="comment" placeholder="Write a comment..."></textarea>
+					<button type="submit" class="send-comment-button">
+						<i class="fa-solid fa-paper-plane fa-lg" ></i>
+					</button>
+				</form>
+				<%} %>
+				<ul class="comments-container">
+					<% for(var i=0; i<comments.length; i++) {%>
+					<li class="single-comment">
+						<span><%= comments[i].user.userName%></span>
+						<span class="date"><%= comments[i].createdAt.getDate()%>.<%= comments[i].createdAt.getMonth()+1%>.<%= comments[i].createdAt.getFullYear()%></span>
+						<p><%= comments[i].comment%></p>
+						<i class="show-comment-options fa-solid fa-ellipsis fa-xl" style="color: #6e6e6e;"></i>
+						<ul class="comment-options">
+							<li>Edit</li>
+							<li>Delete</li>
+						</ul>
+						
+					</li>
+					<% } %>
+				</ul>
+				
 		</div>
 	<!-- /The story-->
   </div>

@@ -16,7 +16,7 @@ body{
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    padding:0 15% 0 15%;
+    padding:0 20% 0 20%;
     max-width: none;
 
 }
@@ -73,7 +73,7 @@ span{
     text-align: center;
 }
 
-span, p, button, label, option{
+span, p, button, label, option, textarea, input{
     font-size: 1.3rem;
 }
 
@@ -296,6 +296,7 @@ input{
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
+    min-height:90vh;
 }
 
 .fav-section{
@@ -665,6 +666,104 @@ textarea {
     margin:40px 40px 0;
 }
 
+/* Comments*/
+.write-comment-form{
+    align-self:flex-start;
+    margin-top: 50px;
+    width:100%;
+    position:relative;
+}
+
+.write-comment-form textarea{
+    width:100%;
+    padding:20px;
+    padding-right:100px;
+    border:1px solid rgb(205, 205, 205);
+    outline:none;  
+    
+}
+
+.send-comment-button{
+    position:absolute;
+    bottom:20px;
+    right:20px;
+    background-color: transparent;
+}
+
+.send-comment-button i{
+    color: #857a7a;
+}
+.send-comment-button:hover i{
+    color:rgb(232, 145, 31) ;
+}
+
+.write-comment-form:invalid button {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+
+.comments-container{
+    width:100%;
+    margin-top:50px;
+}
+
+.single-comment{
+    margin-bottom:20px;
+    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
+    padding:20px;
+    width:100%;
+    position:relative;
+}
+.single-comment p{
+    margin-top:10px;
+}
+
+.show-comment-options{
+    position: absolute;
+    top:20px;
+    right:20px;
+    border:none;
+    background-color: transparent;
+}
+
+.comment-options{
+    display: none;
+    background-color: rgb(255, 254, 246);
+    padding:20px;
+    border-radius: 5px;
+    border-top-right-radius: -50px;
+    position: absolute;
+    width:200px;
+    top:50px;
+    right:40px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.044);
+}
+
+.comment-options li{
+    width:100%;
+    padding:5px;
+}
+
+.comment-options li:hover{
+    background-color: rgb(209, 209, 209);
+}
+
+.comment-options::before{
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #fff;
+    border-bottom: 10px solid transparent;
+  }
+
+
+
+
+/* /Comments*/
 /* /Story*/
 
 
@@ -933,6 +1032,10 @@ textarea {
 @media (max-width:767px){
     *{
         font-size: 13px;
+    }
+    
+    .container{
+        padding:0 10% 0 10%;
     }
 
     .home-main{

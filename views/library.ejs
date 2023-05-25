@@ -88,7 +88,7 @@
         <% for(var i=0; i<stories.length; i++) {%>
           <li class="single-story">
             <!-- <span><%= stories[i].user.userName%></span> -->
-            <a href="/story/<%= stories[i]._id%>">
+            <a class="viewed" data-id="<%= stories[i]._id%>" href="/story/<%= stories[i]._id%>">
                 <div class="story-details">
                   <h3><%= stories[i].title%></h3>
                   <!--Date-->

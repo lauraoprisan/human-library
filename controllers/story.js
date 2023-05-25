@@ -1,6 +1,7 @@
 const cloudinary = require("../middleware/cloudinary");
 const Story = require("../models/Story");
 const Favorite = require("../models/Favorite");
+const Comment = require("../models/Comment");
 
 module.exports = {
   getProfile: async (req, res) => {
@@ -22,7 +23,9 @@ module.exports = {
       //router.get("/:id", ensureAuth,postsController.getPost);
       //http://localhost:3000/post/642f2c9f533b48258c27a452
       //id===642f2c9f533b48258c27a452
-      const story = await Story.findById(req.params.id).populate('user', 'userName').lean();;
+      const story = await Story.findById(req.params.id).populate('user', 'userName').lean();
+      const comments = await Comment.find({story: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean();
+     
 
       let isFav = false
       let isLiked = false
@@ -42,8 +45,9 @@ module.exports = {
         }
 
       }
-
-      res.render("story.ejs", { story: story, user: req.user, isFav:isFav, isLiked:isLiked});
+      console.log("from get story")
+      console.log(comments)
+      res.render("story.ejs", { story: story, comments:comments, user: req.user, isFav:isFav, isLiked:isLiked});
   
     } catch (err) {
       console.log(err);
@@ -51,7 +55,8 @@ module.exports = {
   },
   viewedStory: async (req, res) => {
     try {
-      const story = await Story.findById(req.params.id);
+      console.log("from view story")
+      const story = await Story.findById(req.body.idFromJs);
 
       if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
         story.usersWhoRead.push(req.user.id);
@@ -88,9 +93,28 @@ module.exports = {
         user: req.user.id,
       });
     
+  
       console.log("Story has been added!");
       // console.log(req.body);
-      res.redirect("/profile");
+      res.redirect("/story");
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  writeComment: async (req, res) => {
+    try {
+       
+      await Comment.create({
+        comment: req.body.comment,
+        user: req.user.id,
+        story: req.params.id
+
+      });
+    
+  
+      console.log("Story has been added!");
+      // console.log(req.body);
+      res.redirect(`/story/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }

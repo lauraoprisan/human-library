@@ -1,5 +1,5 @@
 Worked on:
-- delete popup
+- comments
 
 
 Problems:
