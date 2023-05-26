@@ -8,6 +8,7 @@ const commentController = require("../controllers/comment");
 
 router.post("/createComment/:id", commentController.createComment);
 router.put("/likeComment/:storyId/:commentId", commentController.likeComment);
+router.put("/unlikeComment/:storyId/:commentId", commentController.unlikeComment);
 
 router.delete("/deleteComment/:storyId/:commentId", commentController.deleteComment);
 

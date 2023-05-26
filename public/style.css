@@ -631,7 +631,7 @@ textarea {
     max-width:500px;
 }
 
-.popup-container.active{
+#delete-story-popup.active, #delete-comment-popup.active{
     transform:translate(-50%,-50%) ;
     display:flex;
     pointer-events:all;

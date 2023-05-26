@@ -47,21 +47,53 @@ module.exports = {
         const comment = await Comment.findById(req.params.commentId);
       
         // Adding like whether the user already liked it or not
+     
+        comment.usersWhoLiked.unshift(req.user.id);
+        comment.likes++;
+        await comment.save();
+
+        
+        console.log("from like comment")
+        console.log("comment")
         console.log(comment)
-        if (comment.usersWhoLiked.filter(user => user._id == req.user.id).length>0) { 
-            res.redirect(`/story/${req.params.storyId}`);
-            console.log("Comment already liked")
-        } else{
-            comment.usersWhoLiked.unshift(req.user.id);
-            comment.likes++;
-            await comment.save();
-            res.redirect(`/story/${req.params.storyId}`);
-        }
+
+        res.redirect(`/story/${req.params.storyId}`);
+        
 
 
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
+    }
+  },
+  unlikeComment: async (req, res) => {
+    try {
+        console.log("hei")
+        const comment = await Comment.findById(req.params.commentId);
+      
+
+        //deleting the user from the usersWhoLiked array
+        comment.usersWhoLiked.forEach((user,index,arr) =>{
+            if(user._id == req.user.id){
+            arr.splice(index,1)
+            }
+        })
+
+        comment.likes--;
+        await comment.save();
+
+        console.log("from unlike comment")
+        console.log("comment")
+        console.log(comment)
+      
+    
+        res.redirect(`/story/${req.params.storyId}`);
+        
+
+
+    } catch (err) {
+        console.error(err);
+        // res.status(500).send("Server Error");
     }
   },
 };

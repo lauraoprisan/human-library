@@ -1,7 +1,6 @@
 Worked on:
-- delete comments
-- like comments
-- solved some issues with favorite and library (no stories to be shown, deleting also favorites who are deleted stories)
+- unlike comment
+- solved some issues (popup, comments on profile page, delete comments of deleted story)
 
 
 Problems:

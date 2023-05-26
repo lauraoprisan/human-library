@@ -49,6 +49,7 @@
 
 			<!-- User self-story actions-->
 			<%if( user && story.user._id == user.id){ %>
+
 				<div class="user-actions-buttons">
 					<!--Edit story--> 
 					<a href="/editStory/<%= story._id%>">
@@ -56,13 +57,7 @@
 					</a>
 					<!-- /Edit story--> 
 					<!--Delete story-->         
-					<form
-						action="/story/deleteStory/<%= story._id %>?_method=DELETE"
-						method="POST"
-						class="col-1"
-					>
-							<button class="fa-solid fa-trash fa-2xl" style="color: #b45050;" type="submit"></button>
-					</form>
+					<button class="show-delete-story-popup fa-solid fa-trash fa-2xl" style="color: #b45050;"></button>
 					<!--/Delete story-->
 				</div>
 			<%}%>
@@ -155,16 +150,25 @@
 								</section>
 								<% } %>
 								<div class="comment-reactions-interaction">
+									<!--if the user liked the comment-->
+									<%if(comments[i].usersWhoLiked.filter(obj=>obj._id == user.id).length>0){%>
 									<form  
+										action="/comment/unlikeComment/<%= story._id %>/<%= comments[i]._id %>?_method=PUT"
+										method="POST"
+									>
+										<button class="user-liked" type="submit">Like</button>
+									</form>
+									<!--if the user didn't like the comment-->
+									<%} else {%>
+										<form  
 										action="/comment/likeComment/<%= story._id %>/<%= comments[i]._id %>?_method=PUT"
 										method="POST"
 									>
-									<%if(comments[i].usersWhoLiked.filter(obj=>obj._id == user.id).length>0){%>
-										<button class="user-liked" type="submit">Like</button>
-									<%} else {%>
 										<button type="submit">Like</button>
-									<% } %>
 									</form>
+									<% } %>
+
+
 									<form  action="">
 										<button type="submit">Reply</button>
 									</form>
@@ -190,9 +194,26 @@
 						</li>
 					<% } %>
 				</ul>
+				<!-- /comments section-->
 		</div>
 	<!-- /The story-->
   </div>
+</section>
+<section class="popup-container" id="delete-story-popup">
+	<div class="popup">
+		<p>Are you sure you want to delete the story?</p>
+		<div class="flex-row">
+			<button class=" delete-story-popup-button cancel-button">No</button>
+			<form
+			action="/story/deleteStory/<%= story._id %>?_method=DELETE"
+			method="POST"
+			>
+				<button class="delete-story-popup-button highlight-button" type="sub
+				">Yes</button>
+			</form>
+			
+		</div>
+	</div>
 </section>
 
 

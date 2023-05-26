@@ -10,8 +10,16 @@ module.exports = {
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
       const story = await Story.find({ user: req.user.id });
+
+      let comments = false;
+      if(story.length!=0){
+         comments = await Comment.find({story:story[0]._id}).populate('user');
+      }
+      
+     
+      
       //Sending post data from mongodb and user data to ejs template
-      res.render("profile.ejs", { story: story[0], user: req.user, editStory:false, errorMessage:false, imgError:false });
+      res.render("profile.ejs", { story: story[0],comments:comments, user: req.user, editStory:false, errorMessage:false, imgError:false });
 
     } catch (err) {
       console.log(err);
@@ -241,12 +249,14 @@ module.exports = {
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(story.cloudinaryId);
 
-      // Delete favorites associated with the story
-      
-      await Favorite.deleteMany({ story: req.params.id });
+      // Delete favorites associated with the story from database
+      await Favorite.deleteMany({story: req.params.id});
+
+      // Delete comments of the story from database
+      await Comment.deleteMany({story: req.params.id})
 
       // Delete post from db
-      await Story.remove({ _id: req.params.id });
+      await Story.deleteOne({ _id: req.params.id });
       console.log("Deleted story");
       res.redirect("/profile");
     } catch (err) {
