@@ -1,6 +1,6 @@
 Worked on:
 - unlike comment
-- solved some issues (popup, comments on profile page, delete comments of deleted story)
+- solved some issues (popup, comments on profile page v2, delete comments of deleted story)
 
 
 Problems:

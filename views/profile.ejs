@@ -140,7 +140,6 @@
 				<p class="story-text"><%= story.textContent%></p>
 			</div>
 			<!--comments section-->
-			<%if(user){ %>
 				<form 
 					action="/comment/createComment/<%= story._id %>"
 					method="POST"
@@ -150,7 +149,6 @@
 						<i class="fa-solid fa-paper-plane fa-lg" ></i>
 					</button>
 				</form>
-				<%} %>
 				<ul class="comments-container">
 					<% for(var i=0; i<comments.length; i++) {%>
 						<li class="single-comment">

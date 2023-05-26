@@ -305,7 +305,9 @@ module.exports = {
           new:true,
         });
 
-        res.render("profile.ejs", {story: story, user: req.user, editStory:true, errorMessage: false,imgError:false});
+       
+  
+        res.render("profile.ejs", {story: story,  user: req.user, editStory:true, errorMessage: false,imgError:false});
 
     } catch (err) {
        console.log(err);
@@ -354,7 +356,8 @@ module.exports = {
           new:true,
         });
 
-        res.render("profile.ejs", {story: story, user: req.user, editStory:false, imgError:false});
+        // res.render("profile.ejs", {story: story, user: req.user, editStory:false, imgError:false});
+        res.redirect("/profile");
     
     } catch (err) {
        console.log(err);
