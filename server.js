@@ -11,6 +11,7 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const storyRoutes = require("./routes/story");
 const libraryRoutes = require("./routes/library");
+const commentRoutes = require("./routes/comment");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
@@ -58,6 +59,7 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/story", storyRoutes);
 app.use("/library", libraryRoutes);
+app.use("/comment", commentRoutes);
 
 
 //Server Running

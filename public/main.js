@@ -296,21 +296,8 @@ function viewedStory(){
         });
 }
 
-//show comments options
+//  show/hide comments options
 
-// const showCommentOptions = document.querySelectorAll(".show-comment-options")
-
-// if (showCommentOptions) {
-//     showCommentOptions.forEach((showOption) => {
-//       showOption.addEventListener('click', () => {
-//         const parentComment = showOption.closest('.single-comment');
-//         const commentOptions = parentComment.querySelector('.comment-options');
-//         commentOptions.style.display = "block";
-//       });
-//     });
-
-    
-//   }
 
 const showCommentOptions = document.querySelectorAll(".show-comment-options");
 
@@ -318,19 +305,51 @@ if (showCommentOptions) {
   showCommentOptions.forEach((showOption) => {
     showOption.addEventListener('click', (event) => {
       event.stopPropagation(); // Prevent the click event from bubbling up
+
+      // Close comment-options in other li elements
+      const allCommentOptions = document.querySelectorAll('.comment-options');
+      allCommentOptions.forEach((option) => {
+        if (option !== showOption.nextElementSibling) {
+          option.classList.add('hidden');
+        }
+      });
+
+      // Toggle comment-options in the clicked li element
       const parentComment = showOption.closest('.single-comment');
       const commentOptions = parentComment.querySelector('.comment-options');
-      commentOptions.style.display = "block";
+      commentOptions.classList.toggle('hidden');
     });
   });
 
   document.addEventListener('click', (event) => {
-    showCommentOptions.forEach((showOption) => {
-      const parentComment = showOption.closest('.single-comment');
-      const commentOptions = parentComment.querySelector('.comment-options');
-      if (!commentOptions.contains(event.target)) {
-        commentOptions.style.display = "none";
-      }
-    });
+      const commentOptions = document.querySelectorAll('.comment-options');
+      commentOptions.forEach(el => el.classList.add("hidden"))
   });
 }
+
+
+//is this better/different?
+// const showCommentOptions = document.querySelectorAll(".show-comment-options");
+
+// if (showCommentOptions) {
+//   showCommentOptions.forEach((showOption) => {
+//     showOption.addEventListener('click', (event) => {
+//       event.stopPropagation(); // Prevent the click event from bubbling up
+//       const parentComment = showOption.closest('.single-comment');
+//       const commentOptions = parentComment.querySelector('.comment-options');
+//       commentOptions.classList.toggle('hidden');
+//     });
+//   });
+
+//   document.addEventListener('click', (event) => {
+//     showCommentOptions.forEach((showOption) => {
+//       const parentComment = showOption.closest('.single-comment');
+//       const commentOptions = parentComment.querySelector('.comment-options');
+//       if (!commentOptions.contains(event.target) && !showOption.contains(event.target)) {
+//         commentOptions.classList.add('hidden');
+//       }
+//     });
+//   });
+// }
+
+

@@ -23,12 +23,14 @@ module.exports = {
       //router.get("/:id", ensureAuth,postsController.getPost);
       //http://localhost:3000/post/642f2c9f533b48258c27a452
       //id===642f2c9f533b48258c27a452
+      
       const story = await Story.findById(req.params.id).populate('user', 'userName').lean();
-      const comments = await Comment.find({story: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean();
-     
+      const comments = await Comment.find({story: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean().exec();
 
       let isFav = false
       let isLiked = false
+
+    
 
       //if the user is logged in
       if(req.user){
@@ -45,11 +47,13 @@ module.exports = {
         }
 
       }
-      console.log("from get story")
-      console.log(comments)
+     
       res.render("story.ejs", { story: story, comments:comments, user: req.user, isFav:isFav, isLiked:isLiked});
   
+
+      
     } catch (err) {
+      console.log("getstory problem");
       console.log(err);
     }
   },
@@ -96,25 +100,7 @@ module.exports = {
   
       console.log("Story has been added!");
       // console.log(req.body);
-      res.redirect("/story");
-    } catch (err) {
-      console.log(err);
-    }
-  },
-  writeComment: async (req, res) => {
-    try {
-       
-      await Comment.create({
-        comment: req.body.comment,
-        user: req.user.id,
-        story: req.params.id
-
-      });
-    
-  
-      console.log("Story has been added!");
-      // console.log(req.body);
-      res.redirect(`/story/${req.params.id}`);
+      res.redirect("/profile");
     } catch (err) {
       console.log(err);
     }
@@ -124,7 +110,7 @@ module.exports = {
       const story = await Story.findById(req.params.id);
 
       // Adding like whether the user already liked it or not
-      if (story.usersWhoLiked.filter(like => like._id == req.user.id).length>0) { 
+      if (story.usersWhoLiked.filter(user => user._id == req.user.id).length>0) { 
         res.redirect(`/story/${req.params.id}`);
         console.log("Already liked")
       } else{
@@ -248,12 +234,17 @@ module.exports = {
 
   deleteStory: async (req, res) => {
     try {
-      console.log(" delete function")
+  
       // Find post by id
-      let story = await Story.findById({ _id: req.params.id });
-      // console.log("param id" + req.params.id)
+      const story = await Story.findById({ _id: req.params.id });
+
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(story.cloudinaryId);
+
+      // Delete favorites associated with the story
+      
+      await Favorite.deleteMany({ story: req.params.id });
+
       // Delete post from db
       await Story.remove({ _id: req.params.id });
       console.log("Deleted story");

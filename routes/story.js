@@ -13,7 +13,6 @@ router.put("/viewedStory", storyController.viewedStory);
 
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createStory", upload.single("file"), storyController.createStory);
-router.post("/writeComment/:id", storyController.writeComment);
 
 
 router.put("/likeStory/:id", storyController.likeStory);

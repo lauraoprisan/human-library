@@ -12,7 +12,7 @@
 <!--Library content-->
   <section class="container library-content">
 <!--Filter/sort-->
-
+	<% if(stories.length != 0){%>
     <section class="filter-sort">
 		<div class="mobile-filter-sort-buttons">
 			<button id="show-filter" class="highlight-button">Filter</button>
@@ -106,10 +106,10 @@
                 <img class="img-fluid" src="<%= stories[i].image%>">
                 <div class="flex-row reaction-display">
                   <span>
-                    <i class="fa-solid fa-book-open" style="color: #857a7a;"> <%= stories[i].readBy%></i>
+                    <i class="fa-solid fa-book-open" style="color: #857a7a;"> <span class="numbers"><%= stories[i].readBy%></span></i>
                   </span>
                   <span>
-                    <i class="fa-solid fa-thumbs-up" style="color: #857a7a;"> <%= stories[i].likes%></i>
+                    <i class="fa-solid fa-thumbs-up" style="color: #857a7a;"> <span class="numbers"><%= stories[i].likes%></span></i>
                   </span>
                 </div>
                 <div class="story-text-snippet">
@@ -127,6 +127,13 @@
         </ul>
     </section>
 <!-- /Story snippet-->
+<% } else {%>
+	<div class="no-stories-container">
+		<p id="none-saved-info">There are no stories available</p>
+		<i class="none-saved fa-regular fa-star fa-2xl" style="color: #b7b2b2;"></i>
+	</div>
+		
+<% } %>
   </section>
 <!-- /Library content-->
  

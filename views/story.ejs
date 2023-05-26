@@ -35,8 +35,8 @@
 			<!--User reactions-->
 			<div class="flex-row reaction-display">
 				<!--Num of likes and readings-->
-				<i class="fa-solid fa-book-open fa-lg" style="color: #857a7a;"> <%= story.readBy%></i>
-				<i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"> <%= story.likes%></i>
+				<i class="fa-solid fa-book-open fa-lg" style="color: #857a7a;"> <span class="numbers"><%= story.readBy%></span></i>
+				<i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;"><span class="numbers"><%= story.likes%></span> </i>
 				<!-- /Num of likes and readings-->
 			</div>
 			<!-- /User reactions-->
@@ -114,7 +114,7 @@
 				<!--comments section-->
 				<%if(user){ %>
 				<form 
-					action="/story/writeComment/<%= story._id %>"
+					action="/comment/createComment/<%= story._id %>"
 					method="POST"
 					class="write-comment-form">
 					<textarea required oninput="auto_grow(this)" name="comment" placeholder="Write a comment..."></textarea>
@@ -125,24 +125,76 @@
 				<%} %>
 				<ul class="comments-container">
 					<% for(var i=0; i<comments.length; i++) {%>
-					<li class="single-comment">
-						<span><%= comments[i].user.userName%></span>
-						<span class="date"><%= comments[i].createdAt.getDate()%>.<%= comments[i].createdAt.getMonth()+1%>.<%= comments[i].createdAt.getFullYear()%></span>
-						<p><%= comments[i].comment%></p>
-						<i class="show-comment-options fa-solid fa-ellipsis fa-xl" style="color: #6e6e6e;"></i>
-						<ul class="comment-options">
-							<li>Edit</li>
-							<li>Delete</li>
-						</ul>
-						
-					</li>
+						<li class="single-comment">
+							<span><%= comments[i].user.userName%></span>
+							<span class="date"><%= comments[i].createdAt.getDate()%>.<%= comments[i].createdAt.getMonth()+1%>.<%= comments[i].createdAt.getFullYear()%></span>
+							<p><%= comments[i].comment%></p>
+
+							<%if(user){%>
+								<%if(comments[i].user._id == user.id){ %>
+								<i class="show-comment-options  fa-solid fa-ellipsis fa-xl" style="color: #6e6e6e;"></i>
+								<ul class="comment-options hidden">
+									<li>Edit</li>
+									<li>
+										<button class="show-delete-popup" >Delete</button>
+									</li>
+								</ul>
+								<section class="popup-container comment-popup-conainer" id="delete-popup">
+									<div class="popup">
+										<p>Are you sure you want to delete the comment?</p>
+										<div class="flex-row">
+											<button class=" delete-popup-button cancel-button">No</button>
+											<form
+											action="/comment/deleteComment/<%= story._id %>/<%= comments[i]._id %>?_method=DELETE"
+											method="POST"
+											>
+												<button class="delete-popup-button highlight-button" type="submit">Yes</button>
+											</form>
+										</div>
+									</div>
+								</section>
+								<% } %>
+								<div class="comment-reactions-interaction">
+									<form  
+										action="/comment/likeComment/<%= story._id %>/<%= comments[i]._id %>?_method=PUT"
+										method="POST"
+									>
+									<%if(comments[i].usersWhoLiked.filter(obj=>obj._id == user.id).length>0){%>
+										<button class="user-liked" type="submit">Like</button>
+									<%} else {%>
+										<button type="submit">Like</button>
+									<% } %>
+									</form>
+									<form  action="">
+										<button type="submit">Reply</button>
+									</form>
+								</div>
+							<%}%>
+							<% if(comments[i].likes){ %>
+							<div class="comment-likes">
+								<%if(user && comments[i].usersWhoLiked.filter(obj=>obj._id == user.id).length>0){%>
+								<i class="fa-solid fa-thumbs-up fa-lg" style="color: rgb(234, 155, 52);">
+									<span class="numbers">
+										<%= comments[i].likes %>
+									</span>
+								</i>
+								<%} else {%>
+									<i class="fa-solid fa-thumbs-up fa-lg" style="color: #857a7a;">
+										<span class="numbers">
+											<%= comments[i].likes %>
+										</span>
+									</i>
+								<%}%>
+							</div>
+							<% } %>
+						</li>
 					<% } %>
 				</ul>
-				
 		</div>
 	<!-- /The story-->
   </div>
 </section>
+
 
 
 <%- include('partials/footer') -%>

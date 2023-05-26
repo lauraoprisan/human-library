@@ -7,6 +7,15 @@
     line-height: 1.5;
 }
 
+.numbers{
+    display:inline-block;
+    margin-left:10px;
+    color:#857a7a;
+    font-weight: 100;
+    font-size:1.2rem;
+}
+
+
 body{
     position: relative;
 }
@@ -73,7 +82,7 @@ span{
     text-align: center;
 }
 
-span, p, button, label, option, textarea, input{
+span, p, button, label, option, textarea, input, li{
     font-size: 1.3rem;
 }
 
@@ -112,6 +121,10 @@ button{
 }
 .none-saved{
     font-size:15rem;
+}
+
+button{
+    background-color: transparent;
 }
 /* /GENERAL STYLING */
 
@@ -295,7 +308,7 @@ input{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; 
     min-height:90vh;
 }
 
@@ -395,12 +408,12 @@ input{
     font-size: 1.1rem;
 }
 
-.single-story img{
-    /* width:500px;
+/* .single-story img{
+    width:500px;
     height:300px;
-    object-fit: cover; */
+    object-fit: cover;
 
-}
+} */
 
 .story-text-snippet{
     margin-top:20px;
@@ -450,6 +463,13 @@ select option{
 
 .sort-btn:hover{
     color:rgb(234, 155, 52);
+}
+
+.no-stories-container{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 /* /Library  + favorite page*/
@@ -606,6 +626,11 @@ textarea {
     align-items: center;
 }
 
+
+.comment-popup-conainer .popup{
+    max-width:500px;
+}
+
 .popup-container.active{
     transform:translate(-50%,-50%) ;
     display:flex;
@@ -622,6 +647,7 @@ textarea {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin:20px;
 }
 
 .popup button{
@@ -706,16 +732,18 @@ textarea {
 .comments-container{
     width:100%;
     margin-top:50px;
+    
 }
 
 .single-comment{
-    margin-bottom:20px;
+    margin-bottom:50px;
     border-radius: 5px;
     background-color: rgb(230, 230, 230);
     padding:20px;
     width:100%;
     position:relative;
 }
+
 .single-comment p{
     margin-top:10px;
 }
@@ -729,7 +757,6 @@ textarea {
 }
 
 .comment-options{
-    display: none;
     background-color: rgb(255, 254, 246);
     padding:20px;
     border-radius: 5px;
@@ -739,6 +766,7 @@ textarea {
     top:50px;
     right:40px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.044);
+    z-index:5;
 }
 
 .comment-options li{
@@ -760,8 +788,36 @@ textarea {
     border-bottom: 10px solid transparent;
   }
 
+  .comment-options button{
+    background-color: transparent;
+  }
 
+  .comment-reactions-interaction{
+    display:flex;
+    position:absolute;
+    bottom: -30px;
+    left:0;
+  }
 
+  .comment-reactions-interaction button{
+    margin-left:20px;
+    font-size: 1rem;
+  }
+
+  .comment-likes{
+    position: absolute;
+    right:50px;
+    bottom:-12px;
+    padding:2px 10px;
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.127);
+    cursor:default;
+  }
+
+  .user-liked{
+    color:rgb(232, 145, 31)
+  }
 
 /* /Comments*/
 /* /Story*/
@@ -909,7 +965,11 @@ textarea {
     /*library*/
     .library-content{
         flex-direction: column;
+        justify-content: flex-start;
+        align-items: center; 
     }
+
+  
 
     .title-section{
         margin-top:70px;
