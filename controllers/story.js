@@ -13,7 +13,7 @@ module.exports = {
 
       let comments = false;
       if(story.length!=0){
-         comments = await Comment.find({story:story[0]._id}).populate('user');
+         comments = await Comment.find({story:story[0]._id}).populate('user').sort({ createdAt: "desc" }).lean().exec();
       }
       
      

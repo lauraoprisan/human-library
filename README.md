@@ -1,6 +1,6 @@
 Worked on:
-- unlike comment
-- solved some issues (popup, comments on profile page v2, delete comments of deleted story)
+- solved multiple comments - delete option
+- sort look after sorting
 
 
 Problems:
@@ -12,5 +12,5 @@ Problems:
 To do:
 - edit comment
 - reply to comment
-- filter and sort look after filtering/sorting
+- filter look after filtering
 - hover for buttons

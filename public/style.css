@@ -310,6 +310,11 @@ input{
     justify-content: center;
     align-items: flex-start; 
     min-height:90vh;
+    padding:0 15% 0 15%;
+}
+
+.sort-selected{
+    color:rgb(232, 145, 31)
 }
 
 .fav-section{
@@ -631,7 +636,7 @@ textarea {
     max-width:500px;
 }
 
-#delete-story-popup.active, #delete-comment-popup.active{
+#delete-story-popup.active, .delete-comment-popup.active{
     transform:translate(-50%,-50%) ;
     display:flex;
     pointer-events:all;

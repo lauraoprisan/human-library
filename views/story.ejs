@@ -109,7 +109,7 @@
 				<!--comments section-->
 				<%if(user){ %>
 				<form 
-					action="/comment/createComment/<%= story._id %>"
+					action="/comment/createCommentFromStory/<%= story._id %>"
 					method="POST"
 					class="write-comment-form">
 					<textarea required oninput="auto_grow(this)" name="comment" placeholder="Write a comment..."></textarea>
@@ -131,19 +131,19 @@
 								<ul class="comment-options hidden">
 									<li>Edit</li>
 									<li>
-										<button class="show-delete-popup" >Delete</button>
+										<button class="show-delete-comment-popup" >Delete</button>
 									</li>
 								</ul>
-								<section class="popup-container comment-popup-conainer" id="delete-popup">
+								<section class="popup-container comment-popup-container delete-comment-popup">
 									<div class="popup">
 										<p>Are you sure you want to delete the comment?</p>
 										<div class="flex-row">
-											<button class=" delete-popup-button cancel-button">No</button>
+											<button class=" delete-comment-popup-button cancel-button">No</button>
 											<form
 											action="/comment/deleteComment/<%= story._id %>/<%= comments[i]._id %>?_method=DELETE"
 											method="POST"
 											>
-												<button class="delete-popup-button highlight-button" type="submit">Yes</button>
+												<button class="delete-comment-popup-button highlight-button" type="submit">Yes</button>
 											</form>
 										</div>
 									</div>

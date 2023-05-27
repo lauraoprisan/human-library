@@ -27,7 +27,7 @@
 			<form action="/library/filter"
 				method="GET">
 			<div class="flex-col">
-				<span id="filter-country" class="chosen-btn">Country</span>
+				<span id="filter-country" class="chosen-btn" >Country</span>
 				<select id="countries-options" name="country" class="form-control">
 				<% for (let i = -1; i < countries.length; i++) { %>
 					<% if(i == -1){ %>
@@ -38,7 +38,7 @@
 				</select>
 			</div>
 			<div class="flex-col">
-				<span id="filter-continent">Continent</span>
+				<span id="filter-continent" >Continent</span>
 				<select id="continents-options" name="continent" class="form-control hidden">
 				<% for (let i = -1; i < continents.length; i++) { %>
 					<% if(i == -1){ %>
@@ -61,15 +61,45 @@
 			
 			<form action="/library/sortByMostLiked" 
 				method="GET">
-				<button class="sort-btn" type="submit" value="mostLiked" name="likes">Most liked</button>
+				<button class="sort-btn" type="submit" value="mostLiked" name="likes">
+					<% if(sortLikes){ %>
+						<span class="sort-selected">
+							Most liked
+						</span>
+					<% } else { %>
+						<span>
+							Most liked
+						</span>
+					<% } %>
+				</button>
 			</form>
 			<form  action="/library/sortByPopularity" 
 				method="GET">
-				<button class="sort-btn" type="submit"  value="popularityHigh" name="popularity">Popularity</button>
+				<button class="sort-btn" type="submit"  value="popularityHigh" name="popularity">
+					<% if(sortPopularityDesc){ %>
+						<span class="sort-selected">
+							Popularity
+						</span>
+					<% } else { %>
+						<span>
+							Popularity
+						</span>
+					<% } %>
+				</button>
 			</form>
 			<form action="/library/undiscoveredTreasures" 
 				method="GET">
-				<button class="sort-btn" type="submit"  value="popularityLow" name="popularity">Undiscovered Treasures</button>
+				<button class="sort-btn" type="submit"  value="popularityLow" name="popularity">
+					<% if(sortPopularityAsc){ %>
+						<span class="sort-selected">
+							Undiscovered Treasures
+						</span>
+					<% } else { %>
+						<span>
+							Undiscovered Treasures
+						</span>
+					<% } %>
+				</button>
 			</form>
 		</div>
 <!--/Sort-->

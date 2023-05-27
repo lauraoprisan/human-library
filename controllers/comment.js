@@ -3,7 +3,26 @@ const Favorite = require("../models/Favorite");
 const Comment = require("../models/Comment");
 
 module.exports = {
-  createComment: async (req, res) => {
+  createCommentFromProfile: async (req, res) => {
+    try {
+       
+      await Comment.create({
+        comment: req.body.comment,
+        user: req.user.id,
+        story: req.params.id,
+        likes: 0,
+
+      });
+    
+  
+      console.log("Story has been added!");
+      // console.log(req.body);
+      res.redirect(`/profile`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  createCommentFromStory: async (req, res) => {
     try {
        
       await Comment.create({

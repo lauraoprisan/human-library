@@ -231,22 +231,29 @@ if(closeDeleteStoryPopup){
 
 // Delete comment popup
 
-const showDeleteCommentPopup = document.querySelector(".show-delete-comment-popup ")
-const closeDeleteCommentPopup = document.querySelectorAll(".delete-comment-popup-button")
-const deleteCommentPopup = document.querySelector("#delete-comment-popup")
+const showDeleteCommentPopup = document.querySelectorAll(".show-delete-comment-popup");
+const closeDeleteCommentPopup = document.querySelectorAll(".delete-comment-popup-button");
 
-if(showDeleteCommentPopup){
-    showDeleteCommentPopup.addEventListener("click", ()=>{
-        deleteCommentPopup.classList.toggle("active")
-    })
+if (showDeleteCommentPopup) {
+  showDeleteCommentPopup.forEach(el => {
+    el.addEventListener("click", () => {
+      let deleteCommentPopup = el.closest(".comment-options").nextElementSibling;
+      console.log(deleteCommentPopup)
+      deleteCommentPopup.classList.toggle("active");
+    });
+  });
 }
 
-if(closeDeleteCommentPopup){
-    closeDeleteCommentPopup.forEach(btn => btn.addEventListener("click", ()=>{
-        deleteCommentPopup.classList.toggle("active")
-    }))
-    
+if (closeDeleteCommentPopup) {
+  closeDeleteCommentPopup.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let deleteCommentPopup = btn.closest(".delete-comment-popup");
+      deleteCommentPopup.classList.toggle("active");
+    });
+  });
 }
+
+
 // const test = document.querySelector(".test")
 
 // test.addEventListener("click", sendData)

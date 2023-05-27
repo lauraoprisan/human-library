@@ -23,7 +23,11 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: false});
+        filterOn: false,
+        sortLikes:false,
+        sortPopularityDesc:false,
+        sortPopularityAsc:false,
+      });
 
     } catch (err) {
       console.log(err);
@@ -44,7 +48,7 @@ module.exports = {
       .populate('user', 'userName')
       .lean();
 
-       //grabbing the countries an continents from the database,take the unique values and sort them
+       //grabbing the countries and continents from the database,take the unique values and sort them
       const [countries, continents] = await Promise.all([
         getUniqueValues("country"),
         getUniqueValues("continent"),
@@ -57,7 +61,10 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true
+        filterOn: true,
+        sortLikes:false,
+        sortPopularityDesc:false,
+        sortPopularityAsc:false,
       });
 
 
@@ -75,13 +82,17 @@ module.exports = {
         getUniqueValues("continent"),
       ]);
       
-    
+
        res.render("library.ejs", { 
         stories,
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true});
+        filterOn: true,
+        sortLikes:true,
+        sortPopularityDesc:false,
+        sortPopularityAsc:false,
+      });
 
     } catch (err) {
       console.log(err);
@@ -102,7 +113,11 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true});
+        filterOn: true,
+        sortLikes:false,
+        sortPopularityDesc:true,
+        sortPopularityAsc:false,
+      });
 
     } catch (err) {
       console.log(err);
@@ -123,7 +138,11 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true});
+        filterOn: true,
+        sortLikes:false,
+        sortPopularityDesc:false,
+        sortPopularityAsc:true,
+      });
 
     } catch (err) {
       console.log(err);
