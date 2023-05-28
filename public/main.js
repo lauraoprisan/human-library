@@ -302,24 +302,24 @@ Array.from(viewedStoryTrigger).forEach((el)=>{
 // }
 
 // Make the PUT request to mark the post as viewed
-function viewedStory(){
-    const id = viewedStoryTrigger.dataset.id
-    fetch(`story/viewedStory`, {
-        method: 'PUT',
-        body: JSON.stringify({
-                            'idFromJs': id
-                        })
+// function viewedStory(){
+//     const id = viewedStoryTrigger.dataset.id
+//     fetch(`story/viewedStory`, {
+//         method: 'PUT',
+//         body: JSON.stringify({
+//                             'idFromJs': id
+//                         })
         
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response data, e.g., display a success message
-          console.log('Post marked as viewed:', data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-}
+//       })
+//         .then(response => response.json())
+//         .then(data => {
+//           // Handle the response data, e.g., display a success message
+//           console.log('Post marked as viewed:', data);
+//         })
+//         .catch(error => {
+//           console.error('Error:', error);
+//         });
+// }
 
 //  show/hide comments options
 

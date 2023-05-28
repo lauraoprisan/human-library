@@ -1,6 +1,5 @@
 Worked on:
-- solved multiple comments - delete option
-- sort look after sorting
+- part of filter look
 
 
 Problems:

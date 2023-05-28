@@ -9,7 +9,7 @@ const { ensureAuth } = require("../middleware/auth");
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
 router.get("/:id", storyController.getStory);
-router.put("/viewedStory", storyController.viewedStory);
+// router.put("/viewedStory", storyController.viewedStory);
 
 //Enables user to create post w/ cloudinary for media uploads
 router.post("/createStory", upload.single("file"), storyController.createStory);

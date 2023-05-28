@@ -38,7 +38,7 @@ module.exports = {
       let isFav = false
       let isLiked = false
 
-    
+      
 
       //if the user is logged in
       if(req.user){
@@ -54,8 +54,19 @@ module.exports = {
           isLiked = true
         }
 
+
+          //viewedStory
+        // if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
+        //   story.usersWhoRead.push(req.user.id);
+        //   story.readBy++;
+        //   console.log(story.readBy)
+        //   console.log(story)
+        //   // await story.save()
+ 
+        // }
       }
      
+
       res.render("story.ejs", { story: story, comments:comments, user: req.user, isFav:isFav, isLiked:isLiked});
   
 
@@ -65,21 +76,19 @@ module.exports = {
       console.log(err);
     }
   },
-  viewedStory: async (req, res) => {
-    try {
-      console.log("from view story")
-      const story = await Story.findById(req.body.idFromJs);
+  // viewedStory: async (req, res, story) => {
+  //   try {
 
-      if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
-        story.usersWhoRead.push(req.user.id);
-        story.readBy++;
-        await story.save();
-      }
+  //     if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
+  //       story.usersWhoRead.push(req.user.id);
+  //       story.readBy++;
+  //       await story.save();
+  //     }
 
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
   createStory: async (req, res) => {
     try {
       // Check if required fields are present

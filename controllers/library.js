@@ -54,10 +54,11 @@ module.exports = {
         getUniqueValues("continent"),
       ]);
       
+      console.log(req.query.country);
        res.render("library.ejs", {
         stories, 
-        countryChoice:req.query.country, 
-        continentsChoice:req.query.continent, 
+        countryChoice:req.query.country || false, 
+        continentsChoice:req.query.continent || false, 
         user: req.user, 
         countries, 
         continents, 
@@ -88,7 +89,7 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true,
+        filterOn: false,
         sortLikes:true,
         sortPopularityDesc:false,
         sortPopularityAsc:false,
@@ -113,7 +114,7 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true,
+        filterOn: false,
         sortLikes:false,
         sortPopularityDesc:true,
         sortPopularityAsc:false,
@@ -138,7 +139,7 @@ module.exports = {
         user: req.user, 
         countries, 
         continents, 
-        filterOn: true,
+        filterOn: false,
         sortLikes:false,
         sortPopularityDesc:false,
         sortPopularityAsc:true,
