@@ -24,9 +24,15 @@
 				<h3 class="filter-subtitle">Filter</h3>
 				<i class="fa-solid fa-xmark fa-2xl hide-filter-sort" style="color: #857a7a;"></i>
 			</div>
+			<% if (filterOn && countryChoice) { %>
+				<span class="filter-selected">Filtered: <%= countryChoice %></span>
+			<% } else if(filterOn && continentsChoice){ %>
+				<span class="filter-selected">Filtered: <%= continentsChoice %></span>
+			<% } %>
 			<form action="/library/filter"
 				method="GET">
 			<div class="flex-col">
+				
 				<% if ( filterOn && continentsChoice) { %>
 					<span id="filter-country"  >Country</span>
 					<select id="countries-options" name="country" class="form-control hidden">

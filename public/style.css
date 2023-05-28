@@ -141,6 +141,7 @@ header .container{
    
 }
 
+
 /* header nav{
     width:70%;
 } */
@@ -314,6 +315,13 @@ input{
 }
 
 .sort-selected{
+    color:rgb(232, 145, 31)
+}
+
+.filter-selected{
+    display:block;
+    font-size: 1rem;
+    margin-bottom:10px;
     color:rgb(232, 145, 31)
 }
 
