@@ -114,6 +114,8 @@ const filterCountry = document.querySelector("#filter-country")
 const filterContinent = document.querySelector("#filter-continent")
 const countryOptions = document.querySelector("#countries-options")
 const continentOptions = document.querySelector("#continents-options")
+const filterCountryBtn = document.querySelector(".filter-country-btn")
+const filterContinentBtn = document.querySelector(".filter-continent-btn")
 
 if(filterCountry){
     filterCountry.addEventListener("click", showCountries)
@@ -122,6 +124,8 @@ if(filterCountry){
         filterContinent.classList.remove("chosen-btn")
         countryOptions.classList.remove("hidden")
         continentOptions.classList.add("hidden")
+        filterCountryBtn.classList.remove("hidden")
+        filterContinentBtn.classList.add("hidden")
     }
 }
 
@@ -132,6 +136,8 @@ if(filterContinent){
         filterContinent.classList.add("chosen-btn")
         countryOptions.classList.add("hidden")
         continentOptions.classList.remove("hidden")
+        filterCountryBtn.classList.add("hidden")
+        filterContinentBtn.classList.remove("hidden")
     }
 }
 

@@ -29,56 +29,77 @@
 			<% } else if(filterOn && continentsChoice){ %>
 				<span class="filter-selected">Filtered: <%= continentsChoice %></span>
 			<% } %>
-			<form action="/library/filter"
+
+
+
+
+			<form action="/library/filterCountry"
 				method="GET">
-			<div class="flex-col">
-				
-				<% if ( filterOn && continentsChoice) { %>
-					<span id="filter-country"  >Country</span>
-					<select id="countries-options" name="country" class="form-control hidden">
-				<% } else{ %>
-					<span id="filter-country" class="chosen-btn" >Country</span>
-					<select id="countries-options" name="country" class="form-control">
-				<% }  %>
-				
-				<% for (let i = -1; i < countries.length; i++) { %>
-					<% if (i === -1) { %>
-						<option value="">No selection</option>
-					<% } else { %>
-						<% if ( filterOn && countryChoice && countries[i] === countryChoice) { %>
-						<option selected value="<%= countries[i] %>"><%= countries[i] %></option>
+				<div class="flex-col">
+					
+					<% if ( filterOn && continentsChoice) { %>
+						<span id="filter-country"  >Country</span>
+						<select id="countries-options" name="country" class="form-control hidden">
+					<% } else{ %>
+						<span id="filter-country" class="chosen-btn" >Country</span>
+						<select id="countries-options" name="country" class="form-control">
+					<% }  %>
+					
+					<% for (let i = -1; i < countries.length; i++) { %>
+						<% if (i === -1) { %>
+							<option value="">No selection</option>
 						<% } else { %>
-						<option value="<%= countries[i] %>"><%= countries[i] %></option>
+							<% if ( filterOn && countryChoice && countries[i] === countryChoice) { %>
+							<option selected value="<%= countries[i] %>"><%= countries[i] %></option>
+							<% } else { %>
+							<option value="<%= countries[i] %>"><%= countries[i] %></option>
+							<% } %>
 						<% } %>
 					<% } %>
-				<% } %>
 
 
-				</select>
-			</div>
-			<div class="flex-col">
+					</select>
+				</div>
+				
 				<% if ( filterOn && continentsChoice) { %>
-					<span id="filter-continent" class="chosen-btn" >Continent</span>
-					<select id="continents-options" name="continent" class="form-control ">
+					<button class="highlight-button filter-btn filter-country-btn hidden" type="submit" >Filter</button>
 				<% } else{ %>
-					<span id="filter-continent"  >Continent</span>
-					<select id="continents-options" name="continent" class="form-control hidden">
+					<button class="highlight-button filter-btn filter-country-btn" type="submit" >Filter</button>
 				<% }  %>
+			</form>
+			<form action="/library/filterContinent"
+				method="GET">
+				<div class="flex-col">
+					<% if ( filterOn && continentsChoice) { %>
+						<span id="filter-continent" class="chosen-btn" >Continent</span>
+						<select id="continents-options" name="continent" class="form-control ">
+					<% } else{ %>
+						<span id="filter-continent"  >Continent</span>
+						<select id="continents-options" name="continent" class="form-control hidden">
+					<% }  %>
 
-				<% for (let i = -1; i < continents.length; i++) { %>
-					<% if (i === -1) { %>
-						<option value="">No selection</option>
-					<% } else { %>
-						<% if ( filterOn && continentsChoice && continents[i] === continentsChoice) { %>
-						<option selected value="<%= continents[i] %>"><%= continents[i] %></option>
+					<% for (let i = -1; i < continents.length; i++) { %>
+						<% if (i === -1) { %>
+							<option value="">No selection</option>
 						<% } else { %>
-						<option value="<%= continents[i] %>"><%= continents[i] %></option>
+							<% if ( filterOn && continentsChoice && continents[i] === continentsChoice) { %>
+							<option selected value="<%= continents[i] %>"><%= continents[i] %></option>
+							<% } else { %>
+							<option value="<%= continents[i] %>"><%= continents[i] %></option>
+							<% } %>
 						<% } %>
 					<% } %>
-				<% } %>
-				</select>
-			</div>
-			<button class="highlight-button filter-btn" type="submit" >Filter</button>
+					</select>
+				</div>
+				
+
+
+				<% if ( filterOn && continentsChoice) { %>
+					<button class="highlight-button filter-btn filter-continent-btn" type="submit" >Filter</button>
+				<% } else{ %>
+					<button class="highlight-button filter-btn filter-continent-btn hidden" type="submit" >Filter</button>
+				<% }  %>
+				
 			</form>
 		</div>  
 <!--/Filter-->

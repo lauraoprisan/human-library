@@ -8,7 +8,8 @@ const { ensureAuth } = require("../middleware/auth");
 //post/:id, post/createPost, post/likePost/:id, post/deletePost/:id
 
 router.get("/", libraryController.getStories);
-router.get("/filter", libraryController.filterStories)
+router.get("/filterCountry", libraryController.filterCountry)
+router.get("/filterContinent", libraryController.filterContinent)
 router.get("/sortByMostLiked", libraryController.sortByMostLiked)
 router.get("/sortByPopularity", libraryController.sortByPopularity)
 router.get("/undiscoveredTreasures", libraryController.undiscoveredTreasures)

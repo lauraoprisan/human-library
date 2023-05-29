@@ -33,22 +33,47 @@ module.exports = {
       console.log(err);
     }
   },
-  filterStories: async (req, res) => {
+  filterCountry: async (req, res) => {
     try {
      
-      //checks if either country or continent was chosen for filtering
-      const query = req.query.country 
-          ? { country: req.query.country } 
-          :  req.query.continent 
-          ?  { continent: req.query.continent } 
-          : {};
-
-      const stories = await Story.find(query)
+      const stories = await Story.find({country:req.query.country})
       .sort({ createdAt: "desc" })
       .populate('user', 'userName')
       .lean();
 
-       //grabbing the countries and continents from the database,take the unique values and sort them
+       //grabbing the countries from the database,take the unique values and sort them
+       const [countries, continents] = await Promise.all([
+        getUniqueValues("country"),
+        getUniqueValues("continent"),
+      ]);
+      
+      console.log(req.query.country);
+       res.render("library.ejs", {
+        stories, 
+        countryChoice:req.query.country || false, 
+        continentsChoice:false, 
+        user: req.user, 
+        countries, 
+        continents, 
+        filterOn: true,
+        sortLikes:false,
+        sortPopularityDesc:false,
+        sortPopularityAsc:false,
+      });
+
+
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  filterContinent: async (req, res) => {
+    try {
+     
+      const stories = await Story.find({continent:req.query.continent})
+      .sort({ createdAt: "desc" })
+      .populate('user', 'userName')
+      .lean();
+
       const [countries, continents] = await Promise.all([
         getUniqueValues("country"),
         getUniqueValues("continent"),
