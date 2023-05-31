@@ -7,7 +7,7 @@ module.exports = {
     try {
        
       await Comment.create({
-        comment: req.body.comment,
+        comment: req.body.comment.trim(),
         user: req.user.id,
         story: req.params.id,
         likes: 0,
@@ -26,7 +26,7 @@ module.exports = {
     try {
        
       await Comment.create({
-        comment: req.body.comment,
+        comment: req.body.comment.trim(),
         user: req.user.id,
         story: req.params.id,
         likes: 0,

@@ -158,11 +158,17 @@ if(updateImgBtn){
 
 //responsive textarea field
 
+const editTextarea = document.querySelector(".edit-textarea")
+
+if(editTextarea){
+    editTextarea.style.height = editTextarea.scrollHeight+"px";
+}
+
 function auto_grow(element) {
     element.style.height = "auto";
     element.style.height = (element.scrollHeight)+"px";
- 
-}
+ }
+
 
   // Trigger auto_grow function after the page loads
 //   window.addEventListener('load', function() {

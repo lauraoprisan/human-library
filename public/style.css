@@ -5,6 +5,7 @@
     font-size: 16px;
     font-family: 'PT Serif', serif;
     line-height: 1.5;
+ 
 }
 
 .numbers{
@@ -65,6 +66,7 @@ span{
     padding: 10px 20px;
     border-radius: 5px;
     margin:10px 0;
+    cursor:default;
 }
 
 span{
@@ -247,10 +249,10 @@ main p{
     background-color: rgb(234, 155, 52);
     margin-top:3vh;
     padding:10px 20px;
+    border:2px solid rgb(234, 155, 52);
     border-radius: 10px;
-    border:none;
     font-size: 1.8rem;
-    color:rgb(255, 255, 255);
+    color:rgb(255, 254, 246);
 }
 
 .main-buttons{
@@ -263,6 +265,12 @@ main p{
 
 .instructions{
     font-size: 1.5rem;
+}
+
+.home-main-btn:hover {
+    color:rgb(232, 145, 31);
+    border:2px solid rgb(232, 145, 31);
+    background-color: white;
 }
 /* /HOME */
 
@@ -313,6 +321,7 @@ input{
     min-height:90vh;
     padding:0 15% 0 15%;
 }
+
 
 .sort-selected{
     color:rgb(232, 145, 31)
@@ -398,6 +407,11 @@ input{
 .sort-subtitle{
     margin-top:40px;
     margin-bottom:20px;
+}
+
+
+.filter-subtitle, .sort-subtitle, p{
+    cursor:default;
 }
 
 .sort-btn{
@@ -492,6 +506,9 @@ select option{
     align-items: center;
 }
 
+#filter-country, #filter-continent{
+    cursor:pointer ;
+}
 /* /Library  + favorite page*/
 
 /*Profile + story*/
@@ -534,6 +551,7 @@ select option{
     align-self:  flex-start;
     margin-top: 50px;
     margin-left:50px;
+    width:100%;
 }
 
 .create-edit-story div{
@@ -624,7 +642,8 @@ textarea {
 }
 
 .edit-textarea{
-    width:90%;
+    width:100%;
+    height:auto;
 }
 
 /*modal popup*/
@@ -839,6 +858,10 @@ textarea {
     color:rgb(232, 145, 31)
   }
 
+  .show-delete-comment-popup{
+    width:100%;
+    text-align: left;
+  }
 /* /Comments*/
 /* /Story*/
 
@@ -1042,6 +1065,10 @@ textarea {
 
     .remove-options-button{
         display:none;
+    }
+
+    #filter-section{
+        margin-bottom:20px;
     }
 
     /*profile*/

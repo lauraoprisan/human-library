@@ -32,13 +32,11 @@ module.exports = {
       //http://localhost:3000/post/642f2c9f533b48258c27a452
       //id===642f2c9f533b48258c27a452
       
-      const story = await Story.findById(req.params.id).populate('user', 'userName').lean();
+      const story = await Story.findById(req.params.id).populate('user', 'userName');
       const comments = await Comment.find({story: req.params.id}).populate('user').sort({ createdAt: "desc" }).lean().exec();
 
       let isFav = false
       let isLiked = false
-
-      
 
       //if the user is logged in
       if(req.user){
@@ -54,19 +52,14 @@ module.exports = {
           isLiked = true
         }
 
-
-          //viewedStory
-        // if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
-        //   story.usersWhoRead.push(req.user.id);
-        //   story.readBy++;
-        //   console.log(story.readBy)
-        //   console.log(story)
-        //   // await story.save()
- 
-        // }
+        // Retrieve the story as a Mongoose model instance
+        if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
+        
+          await module.exports.viewedStory(req, res, story);
+        }
+        
       }
      
-
       res.render("story.ejs", { story: story, comments:comments, user: req.user, isFav:isFav, isLiked:isLiked});
   
 
@@ -76,19 +69,17 @@ module.exports = {
       console.log(err);
     }
   },
-  // viewedStory: async (req, res, story) => {
-  //   try {
+  viewedStory: async (req, res, story) => {
+    try {
 
-  //     if (!story.usersWhoRead.some(userId => userId._id == req.user.id)) {
-  //       story.usersWhoRead.push(req.user.id);
-  //       story.readBy++;
-  //       await story.save();
-  //     }
+        story.usersWhoRead.push(req.user.id);
+        story.readBy++;
+        await story.save();
 
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
+    } catch (err) {
+      console.log(err);
+    }
+  },
   createStory: async (req, res) => {
     try {
       // Check if required fields are present
@@ -143,6 +134,8 @@ module.exports = {
       res.status(500).send("Server Error");
     }
   },
+
+  
   unlikeStory: async (req, res) => {
     try {
       const story = await Story.findById(req.params.id);
