@@ -20,7 +20,7 @@ require("dotenv").config({ path: "./config/.env" });
 require("./config/passport")(passport);
 
 //Connect To Database
-// connectDB();
+connectDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
@@ -63,12 +63,7 @@ app.use("/comment", commentRoutes);
 
 
 //Server Running
-// app.listen(process.env.PORT, () => {
-//   console.log("Server is running, you better catch it!");
-// });
+app.listen(process.env.PORT, () => {
+  console.log("Server is running, you better catch it!");
+});
 
-connectDB().then(() => {
-  app.listen(process.env.PORT, () => {
-      console.log("Server is running, you better catch it!");
-  })
-})
