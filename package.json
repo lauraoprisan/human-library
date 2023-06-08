@@ -4,7 +4,7 @@
   "description": "This is a web application where people can read other people's life stories and post their own.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "start: node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
