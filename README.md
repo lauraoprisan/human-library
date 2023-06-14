@@ -21,10 +21,6 @@ comment.
 - rebuild it using React
 - automatically correlate country with continent
 
-## Lessons Learned
-
-Utilized callback functions in the server to try and build a modular and scalable backend. Through this I learned , how to effectively simplify backend routes into independent functions
-
 
 ## Installation
 
