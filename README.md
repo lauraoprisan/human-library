@@ -19,14 +19,14 @@ comment.
 ## Optimizations
 - solve image dimension limitation
 - rebuild it using React
-- automatically correlate country with continent
+- automatically correlate continent with country
 
 
 ## Installation
 
 1. Clone repo
 2. run `npm install`
-3. create a file .env in the config folder and update the followeing variables:
+3. create a .env file in the config folder and update the following variables:
 - PORT
 - MONGO_URI (from MongoDB)
 - CLOUD_NAME (from cloudinary) 
