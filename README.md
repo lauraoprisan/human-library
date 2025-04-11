@@ -1,7 +1,6 @@
 
 
-# Human Library App: <a href="https://human-library.up.railway.app/" target="_blank">Visit Here</a>
-<a href="https://human-library.up.railway.app/" target="_blank">
+# Human Library App
 <img src="https://github.com/lauraoprisan/lauraoprisan/blob/main/media/human-library.gif" width="100%" alt="Human Library App"/>
 </a>
 
